@@ -3,13 +3,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ThemeProvider } from "@emotion/react";
+import GlobalStyle from "./styles/global";
+import { lightTheme, darkTheme } from "./styles/theme";
 
 function queryErrorHandler<T>(error: T) {
   console.log("⛔️ error connecting to server ⛔️");
   return console.log(error);
 }
-
-// TODO : mutations 시 suspense는 defaultOptions로 설정이 안될까?
+// BUG : mutations 시 suspense는 defaultOptions로 설정이 안될까? 거정님은 아나바다에서 설정을 해두었는데 여기서는 type error가 발생함. 안해도 되는 것일까?..
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -27,13 +29,14 @@ const root = ReactDOM.createRoot(
 );
 
 // TODO : Suspense 사용할 수 없을까?
+// TODO : LightTheme, DarkTheme를 contextAPI랑 useReducer를 통해서 관리해보자
 root.render(
   <QueryClientProvider client={queryClient}>
-    <App />
+    <ThemeProvider theme={lightTheme}>
+      <GlobalStyle />
+      <App />
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
