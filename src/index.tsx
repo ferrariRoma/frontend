@@ -4,7 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ThemeProvider } from "@emotion/react";
-import GlobalStyle from "./styles/global";
+import GlobalStyle from "./styles/Global";
 import { lightTheme, darkTheme } from "./styles/theme";
 
 function queryErrorHandler<T>(error: T) {

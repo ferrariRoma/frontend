@@ -15,7 +15,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "removeComments": true
+    "removeComments": true,
+    "jsxImportSource": "@emotion/react"
   },
   "include": ["src"]
 }
