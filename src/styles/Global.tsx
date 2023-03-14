@@ -198,6 +198,9 @@ const style = css`
       background-position: 0% 77%;
     }
   }
+  body {
+    font-size: 16px;
+  }
 `;
 
 const GlobalStyle = () => {
