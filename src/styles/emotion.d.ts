@@ -1,11 +1,9 @@
-import "@emotion/react";
+import '@emotion/react';
 
-declare module "@emotion/react" {
-  export interface DefaultTheme {
+declare module '@emotion/react' {
+  export interface DefaultTheme<T> {
     colors: {
-      bgColor: string;
-      accentColor: string;
-      fontColor: string;
+      [name: string]: T;
     };
   }
 }

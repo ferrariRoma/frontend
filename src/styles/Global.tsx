@@ -1,4 +1,4 @@
-import { css, Global } from "@emotion/react";
+import { css, Global } from '@emotion/react';
 
 const style = css`
   html,
@@ -118,7 +118,7 @@ const style = css`
   blockquote:after,
   q:before,
   q:after {
-    content: "";
+    content: '';
     content: none;
   }
   table {
@@ -128,7 +128,7 @@ const style = css`
 
   input {
     border: none;
-    font-family: "Pretendard-Regular";
+    font-family: 'Pretendard-Regular';
   }
   a {
     text-decoration: none;
@@ -140,6 +140,66 @@ const style = css`
     outline: none;
     border: none;
     background-color: transparent;
+  }
+
+  body {
+    background: linear-gradient(328deg, #b8a2e4, #edbff1, #8ef0e8);
+    background-size: 600% 600%;
+
+    -webkit-animation: AnimationName 59s ease infinite;
+    -moz-animation: AnimationName 59s ease infinite;
+    -o-animation: AnimationName 59s ease infinite;
+    animation: AnimationName 59s ease infinite;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  @-webkit-keyframes AnimationName {
+    0% {
+      background-position: 0% 77%;
+    }
+    50% {
+      background-position: 100% 24%;
+    }
+    100% {
+      background-position: 0% 77%;
+    }
+  }
+  @-moz-keyframes AnimationName {
+    0% {
+      background-position: 0% 77%;
+    }
+    50% {
+      background-position: 100% 24%;
+    }
+    100% {
+      background-position: 0% 77%;
+    }
+  }
+  @-o-keyframes AnimationName {
+    0% {
+      background-position: 0% 77%;
+    }
+    50% {
+      background-position: 100% 24%;
+    }
+    100% {
+      background-position: 0% 77%;
+    }
+  }
+  @keyframes AnimationName {
+    0% {
+      background-position: 0% 77%;
+    }
+    50% {
+      background-position: 100% 24%;
+    }
+    100% {
+      background-position: 0% 77%;
+    }
+  }
+  body {
+    font-size: 16px;
   }
 `;
 
