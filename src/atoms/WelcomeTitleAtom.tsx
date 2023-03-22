@@ -1,8 +1,13 @@
 import React from 'react';
-import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
-function WelcomeTitleAtom() {
-  return <div>WelcomeTitleAtom</div>;
-}
+const WelcomeTitleAtom = ({ children }: { children: string }) => {
+  return <Title>{children}</Title>;
+};
 
 export default WelcomeTitleAtom;
+
+const Title = styled.h1`
+  color: #252222;
+  font-size: 2rem;
+`;
