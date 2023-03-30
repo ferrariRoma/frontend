@@ -3,7 +3,7 @@ import '@emotion/react';
 declare module '@emotion/react' {
   export interface DefaultTheme<T> {
     colors: {
-      [name: string]: T;
+      [name: T]: T;
     };
   }
 }
