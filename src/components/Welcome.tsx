@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { GoogleLoginAtom, WelcomeTitleAtom } from '../atoms';
+import { IChildProps } from '../shared/interfaces';
 
-const Welcome = ({ children }: { children: React.ReactElement[] }) => {
+const Welcome = ({ children }: IChildProps) => {
   return <WelcomeContainer>{children}</WelcomeContainer>;
 };
 

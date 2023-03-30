@@ -1,7 +1,7 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import { IChildProps } from '../shared/interfaces';
 
-const WelcomeTitleAtom = ({ children }: { children: string }) => {
+const WelcomeTitleAtom = ({ children }: IChildProps) => {
   return <Title>{children}</Title>;
 };
 
