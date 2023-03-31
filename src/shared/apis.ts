@@ -40,7 +40,11 @@ baseApi.interceptors.response.use(
   }
 );
 
-export const usersApi = {};
+export const usersApi = {
+  login() {
+    return baseApi.get('users/callback/google/start');
+  },
+};
 export const todosApi = {};
 export const timerApi = {};
 export const settingsApi = {};
