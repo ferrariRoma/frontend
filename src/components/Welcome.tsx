@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { GoogleLoginAtom, WelcomeTitleAtom } from '../atoms';
+import { GoogleLoginAtom, TypoAtom } from '../atoms';
 import { IChildProps } from '../shared/interfaces';
 
 const Welcome = ({ children }: IChildProps) => {
@@ -8,7 +8,7 @@ const Welcome = ({ children }: IChildProps) => {
 
 export default Welcome;
 
-Welcome.WelcomTitleAtom = WelcomeTitleAtom;
+Welcome.TypoAtom = TypoAtom;
 Welcome.GoogleLoginAtom = GoogleLoginAtom;
 
 const WelcomeContainer = styled.div`
