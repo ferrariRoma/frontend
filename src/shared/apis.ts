@@ -15,11 +15,17 @@ const baseApi = axios.create({
 });
 
 baseApi.interceptors.request.use((config) => {
-  const accessToken = localStorage.getItem('extremeToken');
-  if (config.headers)
-    config.headers.extremeToken = accessToken
+  const accessToken = localStorage.getItem('extreme-token');
+  const email = localStorage.getItem('extreme-email');
+
+  if (config.headers) {
+    config.headers['extreme-token'] = accessToken
       ? (accessToken as string)
       : (false as boolean);
+    config.headers['extreme-email'] = email
+      ? (email as string)
+      : (false as boolean);
+  }
   return config;
 });
 
