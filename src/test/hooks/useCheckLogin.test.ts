@@ -4,13 +4,12 @@ import { useCheckLogin } from '../../hooks';
 
 describe('useCheckLogin', () => {
   beforeEach(() => {
-    const getToken = jest.fn(() => userStub().access);
     Object.defineProperty(window, 'localStorage', {
       value: {
-        getItem(key: string) {
-          if (key === 'extremeToken') return getToken();
+        getItem: jest.fn((key: string) => {
+          if (key === 'extremeToken') return userStub().access;
           else return null;
-        },
+        }),
       },
       writable: true,
     });
@@ -29,9 +28,7 @@ describe('useCheckLogin', () => {
     beforeEach(() => {
       Object.defineProperty(window, 'localStorage', {
         value: {
-          getItem(key: string) {
-            return null;
-          },
+          getItem: jest.fn((key: string) => null),
         },
       });
     });
