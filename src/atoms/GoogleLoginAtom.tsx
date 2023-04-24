@@ -1,13 +1,17 @@
 import styled from '@emotion/styled';
 import { ILayoutProps } from '../shared/interfaces';
 
-const GoogleLoginAtom = (props: ILayoutProps) => {
+interface ILoginAtomProps extends ILayoutProps {
+  onClick: () => void;
+}
+
+const GoogleLoginAtom = ({ onClick, ...props }: ILoginAtomProps) => {
   return (
-    <ImgContainer style={props}>
+    <ImgContainer onClick={onClick} style={props}>
       <img
-        src="../../public/2x/btn_google_signin_dark_pressed_web@2x.png"
+        src="btn_google_signin_dark_pressed_web@2x.png"
         alt="google login button"
-      ></img>
+      />
     </ImgContainer>
   );
 };
