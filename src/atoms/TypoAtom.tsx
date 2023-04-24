@@ -14,7 +14,7 @@ const TypoAtom = ({ children, ...props }: ITypoProps) => {
 
 export default TypoAtom;
 
-const Typo = styled.h1<ITypoProps>`
+const Typo = styled.span<ITypoProps>`
   color: ${(props) => props.fontColor ?? '#252222'};
   font-size: ${(props) => props.fontSize};
 `;
