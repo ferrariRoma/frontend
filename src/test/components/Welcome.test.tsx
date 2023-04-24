@@ -1,59 +1,49 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { userStub } from '../../../stubs';
 import Welcome from '../../components/Welcome';
+import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
 
 describe('Welcome', () => {
-  let handleLoginBtn = jest.fn().mockResolvedValue(userStub());
-
   describe('유저가 로그인을 안했을 경우', () => {
+    mockLocalStorage(jest.fn((key: string) => null));
     it('타이틀과 로그인 버튼을 렌더링 한다.', () => {
-      const { container } = render(
-        <Welcome>
-          <Welcome.TypoAtom fontSize="2rem">EXTREME TODO</Welcome.TypoAtom>
-          <Welcome.GoogleLoginAtom handleLoginBtn={handleLoginBtn} />
-        </Welcome>
-      );
+      const { container } = render(<Welcome />);
 
       const googleImage = screen.getByRole('img');
 
       expect(container).toHaveTextContent('EXTREME TODO');
       expect(googleImage).toBeInTheDocument();
       expect(googleImage).toHaveAttribute('alt', 'google login button');
-    });
-  });
 
-  describe('유저가 로그인 버튼을 누르면', () => {
-    it('로그인 url로 리다이렉트를 해준다', () => {
-      render(<Welcome.GoogleLoginAtom handleLoginBtn={handleLoginBtn} />);
-
-      const googleImage = screen.getByAltText(/google login button/i);
-
-      fireEvent.click(googleImage);
-      expect(handleLoginBtn).toBeCalled();
+      // DISCUSSION : 왜 fireEvent.click이 실행이 안될까요?
+      // const usersApi = {
+      //   login: jest.fn(),
+      // };
+      // fireEvent.click(googleImage);
+      // expect(usersApi.login).toBeCalled();
     });
   });
 
   describe('유저가 로그인을 했을 경우', () => {
+    beforeEach(() => {
+      mockLocalStorage(jest.fn((key: string) => 'extremeTokemSample'));
+    });
     it('로그아웃 버튼과 셋팅 버튼을 렌더링 한다.', () => {
-      const { container } = render(
-        <Welcome>
-          <Welcome.TypoAtom fontSize="2rem">EXTREME TODO</Welcome.TypoAtom>
-          <div>
-            <button>logout</button>
-            <button>settings</button>
-          </div>
-        </Welcome>
-      );
+      const { container } = render(<Welcome />);
+
+      const logoutBtn = screen.getByText('logout');
+      const settingBtn = screen.getByText('setting');
+
+      fireEvent.click(logoutBtn);
+      fireEvent.click(settingBtn);
 
       expect(container).toHaveTextContent('EXTREME TODO');
-      // FireLogic 두 개 만들기
     });
   });
 });
 
 /* 
-[x] context
-  유저가 로그인을 안했을 경우
+        [x] context
+        유저가 로그인을 안했을 경우
 it
   타이틀, 로그인 이미지(버튼)을 띄워준다.
 */

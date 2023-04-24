@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import { IChildProps } from '../shared/interfaces';
 
-// interface IBtnAtomProps extends IChildProps &&  {
+interface IBtnAtomProps extends IChildProps {
+  handler: () => void;
+}
 
-// }
-
-function BtnAtom() {
-  return <div></div>;
+function BtnAtom({ children, handler }: IBtnAtomProps) {
+  return <Btn onClick={handler}>{children}</Btn>;
 }
 
 export default BtnAtom;
