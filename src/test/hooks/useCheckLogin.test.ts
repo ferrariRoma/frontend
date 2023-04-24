@@ -1,18 +1,16 @@
 import { renderHook } from '@testing-library/react';
 import { userStub } from '../../../stubs';
 import { useCheckLogin } from '../../hooks';
+import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
 
 describe('useCheckLogin', () => {
   beforeEach(() => {
-    Object.defineProperty(window, 'localStorage', {
-      value: {
-        getItem: jest.fn((key: string) => {
-          if (key === 'extremeToken') return userStub().access;
-          else return null;
-        }),
-      },
-      writable: true,
-    });
+    mockLocalStorage(
+      jest.fn((key: string) => {
+        if (key === 'extremeToken') return userStub().access;
+        else return null;
+      })
+    );
   });
 
   describe('localstorage에 extremeToken이 있으면', () => {
@@ -26,11 +24,7 @@ describe('useCheckLogin', () => {
 
   describe('localstorage에 extremeToken이 없으면', () => {
     beforeEach(() => {
-      Object.defineProperty(window, 'localStorage', {
-        value: {
-          getItem: jest.fn((key: string) => null),
-        },
-      });
+      mockLocalStorage(jest.fn((key: string) => null));
     });
     it('isLogin state를 false로 초기화 해준다', () => {
       const { result } = renderHook(() => useCheckLogin());
