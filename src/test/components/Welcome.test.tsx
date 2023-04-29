@@ -7,8 +7,8 @@ jest.mock('../../shared/apis');
 
 describe('Welcome', () => {
   describe('유저가 로그인을 안했을 경우', () => {
-    mockLocalStorage(jest.fn((key: string) => null));
     it('타이틀과 로그인 버튼을 렌더링 한다.', () => {
+      mockLocalStorage(jest.fn((key: string) => null));
       const { container } = render(<Welcome />);
 
       const googleImage = screen.getByRole('img');
@@ -23,11 +23,8 @@ describe('Welcome', () => {
   });
 
   describe('유저가 로그인을 했을 경우', () => {
-    // beforeEach 안에 안넣으면 통과가 안됨
-    beforeEach(() => {
-      mockLocalStorage(jest.fn((key: string) => 'extremeTokemSample'));
-    });
     it('로그아웃 버튼과 셋팅 버튼을 렌더링 한다.', () => {
+      mockLocalStorage(jest.fn((key: string) => 'extremeTokemSample'));
       const { container } = render(<Welcome />);
 
       const logoutBtn = screen.getByText('logout');
