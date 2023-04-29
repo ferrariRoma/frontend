@@ -9,11 +9,11 @@ interface IWelcome {
 }
 
 const Welcome = () => {
+  const [isLogin, setIsLogin] = useCheckLogin();
+
   const handleLoginBtn = async () => {
     await usersApi.login();
   };
-
-  const [isLogin, setIsLogin] = useCheckLogin();
 
   return (
     <>
@@ -21,8 +21,8 @@ const Welcome = () => {
         <TypoAtom fontSize="2rem">EXTREME TODO</TypoAtom>
         {isLogin ? (
           <BtnContainer>
-            <BtnAtom>logout</BtnAtom>
-            <BtnAtom>setting</BtnAtom>
+            <BtnAtom handler={() => {}}>logout</BtnAtom>
+            <BtnAtom handler={() => {}}>setting</BtnAtom>
           </BtnContainer>
         ) : (
           <GoogleLoginAtom onClick={handleLoginBtn} />

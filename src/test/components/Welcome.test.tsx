@@ -1,6 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import Welcome from '../../components/Welcome';
 import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
+import { usersApi } from '../../shared/apis';
+
+jest.mock('../../shared/apis');
 
 describe('Welcome', () => {
   describe('유저가 로그인을 안했을 경우', () => {
@@ -14,16 +17,13 @@ describe('Welcome', () => {
       expect(googleImage).toBeInTheDocument();
       expect(googleImage).toHaveAttribute('alt', 'google login button');
 
-      // DISCUSSION : 왜 fireEvent.click이 실행이 안될까요?
-      // const usersApi = {
-      //   login: jest.fn(),
-      // };
-      // fireEvent.click(googleImage);
-      // expect(usersApi.login).toBeCalled();
+      fireEvent.click(googleImage);
+      expect(usersApi.login).toBeCalled();
     });
   });
 
   describe('유저가 로그인을 했을 경우', () => {
+    // beforeEach 안에 안넣으면 통과가 안됨
     beforeEach(() => {
       mockLocalStorage(jest.fn((key: string) => 'extremeTokemSample'));
     });
