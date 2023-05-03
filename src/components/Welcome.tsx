@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { BtnAtom, GoogleLoginAtom, TypoAtom } from '../atoms';
 import { usersApi } from '../shared/apis';
 import { useCheckLogin } from '../hooks';
+import { AxiosResponse } from 'axios';
 
 interface IWelcome {
   isLogin: string;
@@ -11,8 +12,12 @@ interface IWelcome {
 const Welcome = () => {
   const [isLogin, setIsLogin] = useCheckLogin();
 
-  const handleLoginBtn = async () => {
-    await usersApi.login();
+  const handleLoginBtn = async (): Promise<AxiosResponse<any, any>> => {
+    return await usersApi.login();
+  };
+
+  const handleLogoutBtn = (): void => {
+    return localStorage.removeItem('extreme-token');
   };
 
   return (
@@ -21,7 +26,7 @@ const Welcome = () => {
         <TypoAtom fontSize="2rem">EXTREME TODO</TypoAtom>
         {isLogin ? (
           <BtnContainer>
-            <BtnAtom handler={() => {}}>logout</BtnAtom>
+            <BtnAtom handler={handleLogoutBtn}>logout</BtnAtom>
             <BtnAtom handler={() => {}}>setting</BtnAtom>
           </BtnContainer>
         ) : (
@@ -42,4 +47,7 @@ const WelcomeContainer = styled.div`
   height: 100vh;
 `;
 
-const BtnContainer = styled.div``;
+const BtnContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;

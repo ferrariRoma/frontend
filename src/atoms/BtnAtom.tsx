@@ -11,4 +11,8 @@ function BtnAtom({ children, handler }: IBtnAtomProps) {
 
 export default BtnAtom;
 
-const Btn = styled.div``;
+const Btn = styled.div`
+  width: 1rem;
+  height: 1rem;
+  font-size: 1.4rem;
+`;
