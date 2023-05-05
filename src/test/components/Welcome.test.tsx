@@ -1,7 +1,9 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Welcome from '../../components/Welcome';
 import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
 import { usersApi } from '../../shared/apis';
+import { SettingModal } from '../../components';
+import App from '../../App';
 
 jest.mock('../../shared/apis');
 
@@ -56,11 +58,15 @@ describe('Welcome', () => {
       expect(renderResult).toContainElement(screen.getByText('setting'));
     });
 
-    it('클릭하면 셋팅 모달을 띄워준다.', () => {
+    it('클릭하면 셋팅 모달을 띄워준다.', async () => {
       const settingBtn = screen.getByText('setting');
+
       fireEvent.click(settingBtn);
-      // const settingTitle = screen.getByText('설정');
-      expect(renderResult).toHaveTextContent('EXTREME TODO');
+
+      await waitFor(() => {
+        const settingTitle = screen.getByText('설정');
+        expect(settingTitle).toBeInTheDocument();
+      });
     });
   });
 });
