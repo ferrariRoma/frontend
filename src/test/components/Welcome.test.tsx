@@ -5,35 +5,62 @@ import { usersApi } from '../../shared/apis';
 
 jest.mock('../../shared/apis');
 
+const mockWelcome = (func: jest.Mock<any, any>) => {
+  mockLocalStorage(func);
+  const { container } = render(<Welcome />);
+  return container;
+};
+
 describe('Welcome', () => {
   describe('유저가 로그인을 안했을 경우', () => {
-    it('타이틀과 로그인 버튼을 렌더링 한다.', () => {
-      mockLocalStorage(jest.fn((key: string) => null));
-      const { container } = render(<Welcome />);
+    let renderResult: HTMLElement;
 
+    beforeEach(() => {
+      renderResult = mockWelcome(jest.fn((key: string) => null));
+    });
+
+    it('타이틀과 로그인 버튼을 렌더링 하고', () => {
+      expect(renderResult).toHaveTextContent('EXTREME TODO');
+      expect(renderResult).toContainElement(
+        screen.getByAltText('google login button')
+      );
+    });
+
+    it('로그인 버튼을 눌렀을 때 login메소드를 작동시킨다.', () => {
       const googleImage = screen.getByRole('img');
-
-      expect(container).toHaveTextContent('EXTREME TODO');
-      expect(googleImage).toBeInTheDocument();
-      expect(googleImage).toHaveAttribute('alt', 'google login button');
-
       fireEvent.click(googleImage);
       expect(usersApi.login).toBeCalled();
     });
   });
 
   describe('유저가 로그인을 했을 경우', () => {
-    it('로그아웃 버튼과 셋팅 버튼을 렌더링 한다.', () => {
-      mockLocalStorage(jest.fn((key: string) => 'extremeTokemSample'));
-      const { container } = render(<Welcome />);
+    let renderResult: HTMLElement;
 
+    beforeEach(() => {
+      renderResult = mockWelcome(
+        jest.fn((key: string) => 'extremeTokemSample')
+      );
+    });
+
+    it('로그아웃 버튼이 렌더링 되어야 하고,', () => {
+      expect(renderResult).toContainElement(screen.getByText('logout'));
+    });
+
+    it('클릭하면 removeItem을 호출한다.', () => {
       const logoutBtn = screen.getByText('logout');
-      const settingBtn = screen.getByText('setting');
-
       fireEvent.click(logoutBtn);
-      fireEvent.click(settingBtn);
+      expect(localStorage.removeItem).toBeCalled();
+    });
 
-      expect(container).toHaveTextContent('EXTREME TODO');
+    it('셋팅 버튼이 렌더링 되어야 하고,', () => {
+      expect(renderResult).toContainElement(screen.getByText('setting'));
+    });
+
+    it('클릭하면 셋팅 모달을 띄워준다.', () => {
+      const settingBtn = screen.getByText('setting');
+      fireEvent.click(settingBtn);
+      // const settingTitle = screen.getByText('설정');
+      expect(renderResult).toHaveTextContent('EXTREME TODO');
     });
   });
 });
@@ -57,12 +84,12 @@ it
 */
 
 /* 
-[ ] context
+[x] context
   유저가 로그인을 했을 경우
 it
   타이틀, signout 버튼, setting 버튼 출력해주기
  
-[ ] context
+[x] context
   signout 버튼을 누르면 
 it
   signout로직이 작동된다.
@@ -74,7 +101,7 @@ it
 */
 
 /* 
-[ ] context
+[x] context
   유저가 접속 시
 it
   토큰을 탐지하고 로그인 이미지를 띄워줄지, 로그아웃/셋팅을 띄워줄지 결정한다. => 이건 custom Hook으로 뺄 거 같다.
