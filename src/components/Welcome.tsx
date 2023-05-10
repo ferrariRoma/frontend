@@ -21,8 +21,20 @@ const Welcome = () => {
         <TypoAtom fontSize="2rem">EXTREME TODO</TypoAtom>
         {isLogin ? (
           <BtnContainer>
-            <BtnAtom handler={() => {}}>logout</BtnAtom>
-            <BtnAtom handler={() => {}}>setting</BtnAtom>
+            <BtnAtom
+              handler={() => {
+                return;
+              }}
+            >
+              logout
+            </BtnAtom>
+            <BtnAtom
+              handler={() => {
+                return;
+              }}
+            >
+              setting
+            </BtnAtom>
           </BtnContainer>
         ) : (
           <GoogleLoginAtom onClick={handleLoginBtn} />

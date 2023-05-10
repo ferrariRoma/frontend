@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const useCheckLogin = (): [
   boolean,
-  React.Dispatch<React.SetStateAction<boolean>>
+  React.Dispatch<React.SetStateAction<boolean>>,
 ] => {
   const [isLogin, setIsLogin] = useState(false);
 
