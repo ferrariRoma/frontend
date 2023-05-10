@@ -43,7 +43,7 @@ baseApi.interceptors.response.use(
       return axios(config);
     }
     return Promise.reject(err);
-  }
+  },
 );
 
 export const usersApi = {
