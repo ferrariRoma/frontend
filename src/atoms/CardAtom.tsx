@@ -6,6 +6,7 @@ const CardAtom = styled.div<{
   padding?: string;
   bg?: 'default' | 'transparent';
 }>`
+  position: relative;
   font-size: 1rem;
   background-color: white;
   background: ${({ theme: { colors }, bg }) => {
@@ -29,6 +30,7 @@ const CardAtom = styled.div<{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 `;
 
 export default CardAtom;

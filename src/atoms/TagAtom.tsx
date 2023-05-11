@@ -16,8 +16,8 @@ interface ITagSpanProps {
     | 'lightGrey_2'
     | 'subFontColor';
   fontsize?: 'sm' | 'md1' | 'md2' | 'b1' | 'b2';
-  size?: 'sm' | 'md' | 'big';
-  bold?: boolean;
+  size?: 'sm' | 'md' | 'big' | 'big2';
+  bold?: 'bold' | 'extraBold';
   shadow?: 'basic_shadow' | 'button_shadow';
 }
 
@@ -54,12 +54,16 @@ const TagSpan = styled.span<ITagSpanProps>`
         return '0.5rem 1.76rem';
       case 'big':
         return '0.58rem 2rem';
+      case 'big2':
+        return '1rem 2.37rem';
       default:
         return '0.5rem 1.76rem';
     }
   }};
   background: ${({ bg, theme }) =>
     bg ? theme.colors[bg] : theme.colors.white};
+  color: ${({ bg, theme }) =>
+    bg === 'titleColor' ? theme.colors.white : theme.colors.subFontColor};
   border-radius: ${({ size }) => {
     switch (size) {
       case 'sm':
@@ -92,7 +96,16 @@ const TagSpan = styled.span<ITagSpanProps>`
         return 1.5;
     }
   }}rem;
-  font-weight: ${({ bold }) => (bold ? 500 : 400)};
+  font-weight: ${({ bold }) => {
+    switch (bold) {
+      case 'bold':
+        return 500;
+      case 'extraBold':
+        return 700;
+      default:
+        return 400;
+    }
+  }};
   line-height: 120%;
   text-overflow: ellipsis;
   overflow: hidden;
