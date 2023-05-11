@@ -200,6 +200,7 @@ const style = css`
   }
   body {
     font-size: 16px;
+    font-family: pretendard;
   }
 `;
 
