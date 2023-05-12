@@ -2,8 +2,6 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Welcome from '../../components/Welcome';
 import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
 import { usersApi } from '../../shared/apis';
-import { SettingModal } from '../../components';
-import App from '../../App';
 
 jest.mock('../../shared/apis');
 
@@ -100,7 +98,7 @@ it
 it
   signout로직이 작동된다.
  
-[ ] context
+[x] context
   setting 버튼을 누르면 
 it
   setting 모달창이 출력된다.

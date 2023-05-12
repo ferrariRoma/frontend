@@ -4,7 +4,7 @@ import { IChildProps } from '../shared/interfaces';
 // DISCUSSION : size 통일하기 99.17 | 49.59 | 30.99
 
 interface ITypoProps extends IChildProps {
-  fontSize: '2rem' | '1.5rem' | '1rem';
+  fontSize: string;
   fontColor?: string;
 }
 

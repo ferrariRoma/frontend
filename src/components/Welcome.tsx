@@ -3,13 +3,12 @@ import { BtnAtom, GoogleLoginAtom, TypoAtom } from '../atoms';
 import { usersApi } from '../shared/apis';
 import { useCheckLogin } from '../hooks';
 import { AxiosResponse } from 'axios';
-
-interface IWelcome {
-  isLogin: string;
-  setIsLogin: React.Dispatch<React.SetStateAction<string>>;
-}
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import SettingModal from './SettingModal';
 
 const Welcome = () => {
+  const [isModal, setIsModal] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useCheckLogin();
 
   const handleLoginBtn = async (): Promise<AxiosResponse<any, any>> => {
@@ -20,6 +19,10 @@ const Welcome = () => {
     return localStorage.removeItem('extreme-token');
   };
 
+  const handleSetting = (): void => {
+    setIsModal((prev) => !prev);
+  };
+
   return (
     <>
       <WelcomeContainer>
@@ -27,7 +30,8 @@ const Welcome = () => {
         {isLogin ? (
           <BtnContainer>
             <BtnAtom handler={handleLogoutBtn}>logout</BtnAtom>
-            <BtnAtom handler={() => {}}>setting</BtnAtom>
+            <BtnAtom handler={handleSetting}>setting</BtnAtom>
+            {isModal && createPortal(<SettingModal />, document.body)}
           </BtnContainer>
         ) : (
           <GoogleLoginAtom onClick={handleLoginBtn} />

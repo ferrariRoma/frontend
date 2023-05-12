@@ -1,6 +1,5 @@
 import { DefaultTheme } from '@emotion/react';
 
-// TODO : light테마에서 fontColor를 이걸로 해도 될까?... 고민해보자!
 export const colorTheme: DefaultTheme<string> = {
   colors: {
     bgColor: '#fad390',
