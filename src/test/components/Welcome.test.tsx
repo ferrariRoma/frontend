@@ -1,7 +1,8 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import Welcome from '../../components/Welcome';
+import {Welcome} from '../../components/index';
 import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
 import { usersApi } from '../../shared/apis';
+import React from 'react';
 
 jest.mock('../../shared/apis');
 
