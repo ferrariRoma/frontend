@@ -1,15 +1,18 @@
 import { fireEvent, render } from '@testing-library/react';
-import { LogInToUnlock, ILogInToUnlockProps } from '../../components';
+import { LogInToUnlock, ILogInToUnlockProps } from '../../molecules';
+import React from 'react';
+import { ThemeProvider } from '@emotion/react';
+import { colorTheme } from '../../styles/theme';
 
-describe('Records', () => {
+describe('LogInToUnlock', () => {
   function renderLogInToUnlock(props: ILogInToUnlockProps) {
+    // DISCUSSION: 테스트 단위에서 테마를 제공하는 더 좋은 방법이나 테마를 무시할 수 있는 방법이 없을까?
     return render(
-      <LogInToUnlock {...props}>
-        <LogInToUnlock.LogInButton />
-      </LogInToUnlock>,
+      <ThemeProvider theme={colorTheme}>
+        <LogInToUnlock {...props} />
+      </ThemeProvider>,
     );
   }
-
   describe('subLabel 프랍을 넘길 경우', () => {
     it('subLabel 텍스트를 렌더링', () => {
       const { getByText } = renderLogInToUnlock({
@@ -33,7 +36,7 @@ describe('Records', () => {
   describe('navigate 프랍만 넘길 경우', () => {
     it('기본 텍스트를 렌더링', () => {
       const { getByText } = renderLogInToUnlock({
-        navigate: () => {},
+        navigate: jest.fn(),
       });
       expect(getByText(/로그인이 필요한 기능입니다./)).not.toBeNull();
       expect(getByText(/로그인하고 기능을 확인해보세요!/)).not.toBeNull();
