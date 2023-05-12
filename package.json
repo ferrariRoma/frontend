@@ -14,9 +14,11 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/slick-carousel": "^1.6.37",
+    "apexcharts": "^3.37.2",
     "axios": "^0.27.2",
     "framer-motion": "^10.3.0",
     "react": "^18.2.0",
+    "react-apexcharts": "^1.4.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.1",
@@ -47,5 +49,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "2.8.7"
   }
 }
