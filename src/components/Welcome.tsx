@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
 import { BtnAtom, GoogleLoginAtom, TypoAtom } from '../atoms';
 import { usersApi } from '../shared/apis';
-import { useCheckLogin, useModal } from '../hooks';
+import { useCheckLogin } from '../hooks';
 import { AxiosResponse } from 'axios';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import SettingModal from './SettingModal';
+import { IChildProps } from '../shared/interfaces';
+import Modal from './Modal';
 
 const Welcome = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -31,7 +33,7 @@ const Welcome = () => {
           <BtnContainer>
             <BtnAtom handler={handleLogoutBtn}>logout</BtnAtom>
             <BtnAtom handler={handleSetting}>setting</BtnAtom>
-            {isModal && useModal({children:<SettingModal />})}
+            {isModal && createPortal(<Modal><SettingModal/></Modal>, document.body)}
           </BtnContainer>
         ) : (
           <GoogleLoginAtom onClick={handleLoginBtn} />
