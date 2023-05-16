@@ -1,5 +1,3 @@
-import { useTheme } from '@emotion/react';
-import { colorTheme } from '../styles/theme';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 
@@ -9,9 +7,6 @@ interface ISwitchAtomProps {
 }
 
 function SwitchAtom({ value, setValue }: ISwitchAtomProps) {
-  // QUESTION : 테마 적용 어떻게 하는건가요?
-  // const theme = useTheme();
-
   return (
     <SwitchContainter value={value} onClick={setValue}>
       <Switch layout>{value ? `on` : `off`}</Switch>
@@ -25,18 +20,22 @@ export default SwitchAtom;
 const Switch = styled(motion.div)`
   width: 4.074375rem;
   height: 2.5rem;
-  border-radius: 1.2rem;
-  background-color: skyblue;
+  border-radius: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${({ theme: { colors } }) => colors.white};
+  /* 글씨 선택 안되게 하기 */
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
 `;
 
 const SwitchContainter = styled.div<Partial<ISwitchAtomProps>>`
-  width: 5.75rem;
+  background-color: ${({ theme: { colors } }) => colors.whiteWine};
+  width: 6.75rem;
   height: 2.5rem;
-  border-radius: 3rem;
+  border-radius: 2.5rem;
   display: flex;
   justify-content: ${(props) => (props.value ? 'flex-end' : 'flex-start')};
-  background-color: grey;
 `;
