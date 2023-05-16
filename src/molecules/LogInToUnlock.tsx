@@ -1,6 +1,6 @@
 import { Children, isValidElement, ReactNode } from 'react';
 import { IChildProps } from '../shared/interfaces';
-import { TagAtom, tmpTypo } from '../atoms';
+import { TagAtom, TypoAtom } from '../atoms';
 import styled from '@emotion/styled';
 
 export interface ILogInToUnlockProps extends IChildProps {
@@ -21,12 +21,12 @@ function LogInToUnlock({
       <div className="labels">
         <img src={icon ?? '/icons/icon-lock.svg'} />
         <div>
-          <LogInToUnlock.typo fowe="700" fosi="1.74rem" ba="#4B86FA">
+          {/* <LogInToUnlock.typo fowe="700" fosi="1.74rem" ba="#4B86FA">
             {label ?? '로그인이 필요한 기능입니다.'}
           </LogInToUnlock.typo>
           <LogInToUnlock.typo fosi="2.32rem">
             {subLabel ?? '로그인하고 기능을 확인해보세요!'}
-          </LogInToUnlock.typo>
+          </LogInToUnlock.typo> */}
         </div>
       </div>
       <LogInToUnlock.loginButton
@@ -45,7 +45,7 @@ function LogInToUnlock({
   );
 }
 
-LogInToUnlock.typo = tmpTypo;
+LogInToUnlock.typo = TypoAtom;
 LogInToUnlock.loginButton = TagAtom;
 
 const UnlockContainer = styled.div`
