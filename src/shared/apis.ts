@@ -1,4 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import { AxiosResponse } from 'axios';
+import { Axios } from 'axios';
 
 interface AxiosCustomRequest extends AxiosRequestConfig {
   retryCount: number;
@@ -47,8 +49,12 @@ baseApi.interceptors.response.use(
 );
 
 export const usersApi = {
-  login() {
+  login(): Promise<AxiosResponse<any, any>> {
     return baseApi.get('users/callback/google/start');
+  },
+  logout(): void {
+    localStorage.removeItem('extreme-email');
+    return localStorage.removeItem('extreme-token');
   },
 };
 export const todosApi = {};

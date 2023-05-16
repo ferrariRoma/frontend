@@ -1,8 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import {Welcome} from '../../components/index';
+import { Welcome } from '../../components/index';
 import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
 import { usersApi } from '../../shared/apis';
-import React from 'react';
 
 jest.mock('../../shared/apis');
 
@@ -23,7 +22,7 @@ describe('Welcome', () => {
     it('타이틀과 로그인 버튼을 렌더링 하고', () => {
       expect(renderResult).toHaveTextContent('EXTREME TODO');
       expect(renderResult).toContainElement(
-        screen.getByAltText('google login button')
+        screen.getByAltText('google login button'),
       );
     });
 
@@ -39,7 +38,7 @@ describe('Welcome', () => {
 
     beforeEach(() => {
       renderResult = mockWelcome(
-        jest.fn((key: string) => 'extremeTokemSample')
+        jest.fn((key: string) => 'extremeTokemSample'),
       );
     });
 

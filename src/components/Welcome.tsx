@@ -6,7 +6,6 @@ import { AxiosResponse } from 'axios';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import SettingModal from './SettingModal';
-import { IChildProps } from '../shared/interfaces';
 import Modal from './Modal';
 
 const Welcome = () => {
@@ -25,6 +24,10 @@ const Welcome = () => {
     setIsModal((prev) => !prev);
   };
 
+  const handleClose = (): void => {
+    setIsModal(false);
+  };
+
   return (
     <>
       <WelcomeContainer>
@@ -33,7 +36,13 @@ const Welcome = () => {
           <BtnContainer>
             <BtnAtom handler={handleLogoutBtn}>logout</BtnAtom>
             <BtnAtom handler={handleSetting}>setting</BtnAtom>
-            {isModal && createPortal(<Modal><SettingModal/></Modal>, document.body)}
+            {isModal &&
+              createPortal(
+                <Modal title="설정" handleClose={handleClose}>
+                  <SettingModal />
+                </Modal>,
+                document.body,
+              )}
           </BtnContainer>
         ) : (
           <GoogleLoginAtom onClick={handleLoginBtn} />
@@ -44,9 +53,6 @@ const Welcome = () => {
 };
 
 export default Welcome;
-
-// Welcome.TypoAtom = TypoAtom;
-// Welcome.GoogleLoginAtom = GoogleLoginAtom;
 
 const WelcomeContainer = styled.div`
   width: 100vw;
