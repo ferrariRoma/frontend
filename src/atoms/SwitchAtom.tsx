@@ -25,10 +25,6 @@ const Switch = styled(motion.div)`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme: { colors } }) => colors.white};
-  /* 글씨 선택 안되게 하기 */
-  -webkit-user-select: none; /* Chrome/Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+ */
 `;
 
 const SwitchContainter = styled.div<Partial<ISwitchAtomProps>>`

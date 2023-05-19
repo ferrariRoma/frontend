@@ -201,6 +201,10 @@ const style = css`
   body {
     font-size: 16px;
     font-family: pretendard;
+    /* 글씨 선택 안되게 하기 */
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
   }
 `;
 

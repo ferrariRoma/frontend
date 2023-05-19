@@ -62,31 +62,45 @@ const WelcomeContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 800;
-  font-size: 99.1717px;
-  line-height: 119px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  letter-spacing: -0.05em;
+  > span:first-of-type {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 99.1717px;
+    line-height: 119px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.05rem;
 
-  /* TitleColor */
+    /* TitleColor */
 
-  background: linear-gradient(
-      114.81deg,
-      #00c2ff 22.57%,
-      rgba(0, 117, 255, 0) 65.81%
-    ),
-    #fa00ff;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
+    background: linear-gradient(
+        114.81deg,
+        #00c2ff 22.57%,
+        rgba(0, 117, 255, 0) 65.81%
+      ),
+      #fa00ff;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
 `;
 
 const BtnContainer = styled.div`
   display: flex;
   justify-content: space-around;
+  width: 23.375rem;
+  height: 2.375rem;
+
+  div {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24.7929px;
+    line-height: 30px;
+    color: ${({ theme: { colors } }) => colors.subFontColor};
+    margin: auto;
+  }
 `;
