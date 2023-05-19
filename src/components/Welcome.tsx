@@ -31,7 +31,7 @@ const Welcome = () => {
   return (
     <>
       <WelcomeContainer>
-        <TypoAtom fontSize="2rem">EXTREME TODO</TypoAtom>
+        <TypoAtom fontSize="6.1875rem">EXTREME TODO</TypoAtom>
         {isLogin ? (
           <BtnContainer>
             <BtnAtom handler={handleLogoutBtn}>logout</BtnAtom>
@@ -57,6 +57,33 @@ export default Welcome;
 const WelcomeContainer = styled.div`
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 99.1717px;
+  line-height: 119px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.05em;
+
+  /* TitleColor */
+
+  background: linear-gradient(
+      114.81deg,
+      #00c2ff 22.57%,
+      rgba(0, 117, 255, 0) 65.81%
+    ),
+    #fa00ff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 `;
 
 const BtnContainer = styled.div`
