@@ -1,23 +1,22 @@
 import '@emotion/react';
 
 declare module '@emotion/react' {
-  export interface DefaultTheme<T> {
+  export interface Theme {
     colors: {
-      [name: T]: T;
+      bgColor: string;
+      titleColor: string;
+      subFontColor: string;
+      accentColor: string;
+      whiteWine: string;
+      white: string;
+      lightGrey: string;
+      bgYellow: string;
+      lightGrey_2: string;
     };
     shadows: {
-      [name: T]: T;
-    };
-  }
-}
-
-declare module '@emotion/react' {
-  export interface Theme<T> {
-    colors: {
-      [name: string]: T;
-    };
-    shadows: {
-      [name: T]: T;
+      basic_shadow: string;
+      button_shadow: string;
+      emboss_shadow: string;
     };
   }
 }

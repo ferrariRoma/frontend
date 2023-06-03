@@ -1,6 +1,6 @@
-import { DefaultTheme } from '@emotion/react';
+import { Theme } from '@emotion/react';
 
-export const colorTheme: DefaultTheme<string> = {
+export const designTheme: Theme = {
   colors: {
     bgColor: '#fad390',
     titleColor: '#4B86FA',
@@ -18,6 +18,6 @@ export const colorTheme: DefaultTheme<string> = {
     emboss_shadow:
       'inset 0px -10px 20px rgba(41, 32, 95, 0.33), inset 0px 10px 30px rgba(255, 255, 255, 0.44)',
   },
-};
+} as const;
 
 // #e55039
