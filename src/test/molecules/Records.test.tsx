@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import React, { ReactNode } from 'react';
 import { Records, IRecordsProps } from '../../molecules';
 import { ThemeProvider } from '@emotion/react';
@@ -33,26 +33,31 @@ describe('Records', () => {
   });
 
   describe('로그인한 경우', () => {
-    it('기록 데이터를 페치하고 기록 데이터를 렌더한다.', () => {
-      const fetchRecords = jest.fn().mockResolvedValue({
-        daily: 207,
-        weekly: 3098,
-        monthly: -20325,
-      }) as unknown as Promise<ITotalFocusTime>;
+    it('기록 데이터를 페치하고 기록 데이터를 렌더한다.', async () => {
+      const fetchRecords = jest.fn(
+        jest.fn().mockResolvedValue({
+          daily: 207,
+          weekly: 3098,
+          monthly: -20325,
+        } as ITotalFocusTime),
+      );
       const { getByText } = renderRecords({ fetchRecords, isLogin: false });
-      expect(fetchRecords).toBeCalled();
-      expect(getByText(/207/)).not.toBeNull();
-      expect(getByText(/3,098/)).not.toBeNull();
-      expect(getByText(/-20,325/)).not.toBeNull();
+
+      await waitFor(() => {
+        expect(fetchRecords).toBeCalled();
+        expect(getByText(/207/)).not.toBeNull();
+        expect(getByText(/3,098/)).not.toBeNull();
+        expect(getByText(/-20,325/)).not.toBeNull();
+      });
     });
 
-    it('기록 데이터를 페치에 실패하고 알린다.', () => {
-      const fetchRecords = jest
-        .fn()
-        .mockRejectedValue('failed') as unknown as Promise<ITotalFocusTime>;
+    it('기록 데이터를 페치에 실패하고 알린다.', async () => {
+      const fetchRecords = jest.fn(jest.fn().mockRejectedValue('failed'));
       const { getByText } = renderRecords({ fetchRecords, isLogin: true });
-      expect(fetchRecords).toBeCalled();
-      expect(getByText(/데이터를 불러올 수 없습니다./)).not.toBeNull();
+      await waitFor(() => {
+        expect(fetchRecords).toBeCalled();
+        expect(getByText(/데이터를 불러올 수 없습니다./)).not.toBeNull();
+      });
     });
   });
 });
