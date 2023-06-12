@@ -76,7 +76,7 @@ export const usersApi = {
     } as IRanking;
   },
   getRecords: async () => {
-    return { daily: 300, weekly: 400, monthly: 500 } as ITotalFocusTime;
+    return { daily: 207, weekly: 3098, monthly: -20325 } as ITotalFocusTime;
     // return baseApi.get('timer/progress');
   },
   logout(): void {
