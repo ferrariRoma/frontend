@@ -40,7 +40,7 @@ const SettingModal = () => {
               backgroundColor={'whiteWine'}
               size={1.5625}
             >
-              <img src="icons/tooltip.svg"></img>
+              <img alt="close" src="icons/tooltip.svg"></img>
             </IconAtom>
           </TooltipWrapper>
           <SwitchAtom setValue={handleSwitch} value={value} />
@@ -76,7 +76,7 @@ const ExtremeContainer = styled.div`
   display: flex;
   align-items: center;
 
-  > :nth-child(2) {
+  > :nth-of-type(2) {
     margin-left: 0.3125rem;
   }
 

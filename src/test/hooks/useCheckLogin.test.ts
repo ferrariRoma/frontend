@@ -9,7 +9,7 @@ describe('useCheckLogin', () => {
       jest.fn((key: string) => {
         if (key === 'extremeToken') return userStub().access;
         else return null;
-      })
+      }),
     );
   });
 
