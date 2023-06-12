@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { TagAtom, tmpTypo } from '../atoms';
+import { TagAtom, TypoAtom } from '../atoms';
 import { IChildProps } from '../shared/interfaces';
 import { css } from '@emotion/react';
 
@@ -33,25 +33,13 @@ function RecordCell({ children, label, record }: IRankingProps) {
           display: flex;
           justify-content: center;
           align-items: center;
+          gap: 1.25rem;
         `}
       >
-        <RecordCell.RecordTypo
-          ba={
-            record > 0
-              ? 'linear-gradient(114.81deg, #00C2FF 22.57%, rgba(0, 117, 255, 0) 65.81%), #FA00FF;'
-              : '#222F3E'
-          }
-          fosi={'7.43rem'}
-          fowe={'800'}
-        >
+        <RecordCell.RecordTypo fontSize={'h1'} rainbow={record > 0}>
           {record > 0 ? '+' + record.toLocaleString() : record.toLocaleString()}
         </RecordCell.RecordTypo>
-        <RecordCell.bodyTypo
-          fosi="2.324rem"
-          css={css`
-            margin-left: 20px;
-          `}
-        >
+        <RecordCell.bodyTypo fontSize={'h3'}>
           분 ({formatRecord(record)})
         </RecordCell.bodyTypo>
       </div>
@@ -80,7 +68,7 @@ const formatRecord = (record: number): string => {
 };
 
 RecordCell.RecordLabel = TagAtom;
-RecordCell.RecordTypo = tmpTypo;
-RecordCell.bodyTypo = tmpTypo;
+RecordCell.RecordTypo = TypoAtom;
+RecordCell.bodyTypo = TypoAtom;
 
 export default RecordCell;

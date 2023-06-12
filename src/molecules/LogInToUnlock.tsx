@@ -21,12 +21,12 @@ function LogInToUnlock({
       <div className="labels">
         <img src={icon ?? '/icons/icon-lock.svg'} />
         <div>
-          {/* <LogInToUnlock.typo fowe="700" fosi="1.74rem" ba="#4B86FA">
+          <LogInToUnlock.typo fontSize={'body_bold'} fontColor={'titleColor'}>
             {label ?? '로그인이 필요한 기능입니다.'}
           </LogInToUnlock.typo>
-          <LogInToUnlock.typo fosi="2.32rem">
+          <LogInToUnlock.typo fontSize={'h3'}>
             {subLabel ?? '로그인하고 기능을 확인해보세요!'}
-          </LogInToUnlock.typo> */}
+          </LogInToUnlock.typo>
         </div>
       </div>
       <LogInToUnlock.loginButton
