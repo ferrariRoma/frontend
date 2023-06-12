@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { IChildProps } from '../shared/interfaces';
 import { BtnAtom, CardAtom, TypoAtom } from '../atoms';
+import IconAtom from '../atoms/IconAtom';
 
 interface IModalProps extends IChildProps {
   title: string;
@@ -13,12 +14,17 @@ const Modal = ({ title, children, handleClose, handleDone }: IModalProps) => {
     <>
       <ModalContainer>
         <HeaderContainer>
-          <TypoAtom fontSize={`2.324375rem`} fontColor="#4B86FA">
+          <TypoAtom fontSize={'h3'} fontColor={'titleColor'}>
             {title}
           </TypoAtom>
-          <BtnAtom handler={handleClose}>
-            <span className="material-symbols-outlined">close</span>
-          </BtnAtom>
+
+          <IconAtom
+            onClick={handleClose}
+            size={4.455}
+            backgroundColor={'whiteWine'}
+          >
+            <img src={'icons/close.svg'}></img>
+          </IconAtom>
         </HeaderContainer>
         {children}
         {/* <FooterContainer>
@@ -41,8 +47,20 @@ const ModalContainer = styled(CardAtom)`
       rgba(255, 255, 255, 0) 55.21%
     ), ${colors.bgYellow}`};
   padding: 2.324375 3.2925;
+
+  position: absolute;
+  z-index: 99;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
-const HeaderContainer = styled.div``;
+const HeaderContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rem;
+`;
 
 const FooterContainer = styled.div``;
