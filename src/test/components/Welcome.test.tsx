@@ -1,13 +1,26 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import { Welcome } from '../../components/index';
 import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
 import { usersApi } from '../../shared/apis';
+import { ThemeProvider } from '@emotion/react';
+import { designTheme } from '../../styles/theme';
+import React from 'react';
 
 jest.mock('../../shared/apis');
 
 const mockWelcome = (func: jest.Mock<any, any>) => {
   mockLocalStorage(func);
-  const { container } = render(<Welcome />);
+  const { container } = render(
+    <ThemeProvider theme={designTheme}>
+      <Welcome />
+    </ThemeProvider>,
+  );
   return container;
 };
 
@@ -43,25 +56,25 @@ describe('Welcome', () => {
     });
 
     it('로그아웃 버튼이 렌더링 되어야 하고,', () => {
-      expect(renderResult).toContainElement(screen.getByText('logout'));
+      expect(renderResult).toContainElement(screen.getByText('SIGN OUT'));
     });
 
     it('클릭하면 removeItem을 호출한다.', () => {
-      const logoutBtn = screen.getByText('logout');
+      const logoutBtn = screen.getByText('SIGN OUT');
       fireEvent.click(logoutBtn);
       expect(localStorage.removeItem).toBeCalled();
     });
 
     it('셋팅 버튼이 렌더링 되어야 하고,', () => {
-      expect(renderResult).toContainElement(screen.getByText('setting'));
+      expect(renderResult).toContainElement(screen.getByText('SETTING'));
     });
 
-    it('클릭하면 셋팅 모달을 띄워준다.', async () => {
-      const settingBtn = screen.getByText('setting');
+    it('클릭하면 셋팅 모달을 띄워준다.', () => {
+      const settingBtn = screen.getByText('SETTING');
 
       fireEvent.click(settingBtn);
 
-      await waitFor(() => {
+      act(() => {
         const settingTitle = screen.getByText('설정');
         expect(settingTitle).toBeInTheDocument();
       });
