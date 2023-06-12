@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
+import TypoAtom from './TypoAtom';
 
 interface ISwitchAtomProps {
   value: boolean;
@@ -9,7 +10,11 @@ interface ISwitchAtomProps {
 function SwitchAtom({ value, setValue }: ISwitchAtomProps) {
   return (
     <SwitchContainter value={value} onClick={setValue}>
-      <Switch layout>{value ? `on` : `off`}</Switch>
+      <Switch layout>
+        <TypoAtom fontColor={'titleColor'} fontSize={'tag'}>
+          {value ? `ON` : `OFF`}
+        </TypoAtom>
+      </Switch>
     </SwitchContainter>
   );
 }
@@ -29,9 +34,10 @@ const Switch = styled(motion.div)`
 
 const SwitchContainter = styled.div<Partial<ISwitchAtomProps>>`
   background-color: ${({ theme: { colors } }) => colors.whiteWine};
-  width: 6.75rem;
+  width: 5.5rem;
   height: 2.5rem;
   border-radius: 2.5rem;
   display: flex;
   justify-content: ${(props) => (props.value ? 'flex-end' : 'flex-start')};
+  padding: 0.1875rem;
 `;

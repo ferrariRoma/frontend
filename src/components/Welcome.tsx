@@ -31,12 +31,16 @@ const Welcome = () => {
   return (
     <>
       <WelcomeContainer>
-        <TypoAtom fontSize="6.1875rem">EXTREME TODO</TypoAtom>
+        <TypoAtom fontSize={'h1'}>EXTREME TODO</TypoAtom>
         {isLogin ? (
           <BtnContainer>
-            <BtnAtom handler={handleLogoutBtn}>logout</BtnAtom>
+            <BtnAtom handler={handleLogoutBtn}>
+              <TypoAtom fontSize="h5">SIGN OUT</TypoAtom>
+            </BtnAtom>
             <div></div>
-            <BtnAtom handler={handleSetting}>setting</BtnAtom>
+            <BtnAtom handler={handleSetting}>
+              <TypoAtom fontSize="h5">SETTING</TypoAtom>
+            </BtnAtom>
             {isModal &&
               createPortal(
                 <Modal title="설정" handleClose={handleClose}>
@@ -64,10 +68,7 @@ const WelcomeContainer = styled.div`
   align-items: center;
 
   > span:first-of-type {
-    font-family: 'Pretendard';
     font-style: normal;
-    font-weight: 800;
-    font-size: 99.1717px;
     line-height: 119px;
     display: flex;
     align-items: center;
@@ -96,10 +97,6 @@ const BtnContainer = styled.div`
   height: 2.375rem;
 
   > div {
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 800;
-    font-size: 24.7929px;
     line-height: 30px;
     color: ${({ theme: { colors } }) => colors.subFontColor};
     margin: auto;
