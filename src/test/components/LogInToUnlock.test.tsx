@@ -2,13 +2,13 @@ import { fireEvent, render } from '@testing-library/react';
 import { LogInToUnlock, ILogInToUnlockProps } from '../../molecules';
 import React from 'react';
 import { ThemeProvider } from '@emotion/react';
-import { colorTheme } from '../../styles/theme';
+import { designTheme } from '../../styles/theme';
 
 describe('LogInToUnlock', () => {
   function renderLogInToUnlock(props: ILogInToUnlockProps) {
     // DISCUSSION: 테스트 단위에서 테마를 제공하는 더 좋은 방법이나 테마를 무시할 수 있는 방법이 없을까?
     return render(
-      <ThemeProvider theme={colorTheme}>
+      <ThemeProvider theme={designTheme}>
         <LogInToUnlock {...props} />
       </ThemeProvider>,
     );
