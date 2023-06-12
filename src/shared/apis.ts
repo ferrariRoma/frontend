@@ -1,5 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { IRanking, ITotalFocusTime } from './interfaces';
+import { AxiosResponse } from 'axios';
+import { Axios } from 'axios';
 
 interface AxiosCustomRequest extends AxiosRequestConfig {
   retryCount: number;
@@ -48,7 +50,7 @@ baseApi.interceptors.response.use(
 );
 
 export const usersApi = {
-  login() {
+  login(): Promise<AxiosResponse<any, any>> {
     return baseApi.get('users/callback/google/start');
   },
   getRanking: async () => {
@@ -76,6 +78,10 @@ export const usersApi = {
   getRecords: async () => {
     return { daily: 300, weekly: 400, monthly: 500 } as ITotalFocusTime;
     // return baseApi.get('timer/progress');
+  },
+  logout(): void {
+    localStorage.removeItem('extreme-email');
+    return localStorage.removeItem('extreme-token');
   },
 };
 export const todosApi = {};

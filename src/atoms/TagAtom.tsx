@@ -1,20 +1,14 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { IChildProps } from '../shared/interfaces';
+import { designTheme } from '../styles/theme';
 
-interface ITagAtomProps extends IChildProps {
+export interface ITagAtomProps extends IChildProps {
   handler?: () => void;
   styleOption?: ITagSpanProps;
 }
 
 interface ITagSpanProps {
-  bg?:
-    | 'white'
-    | 'lightGrey'
-    | 'titleColor'
-    | 'whiteWine'
-    | 'lightGrey_2'
-    | 'subFontColor';
+  bg?: keyof typeof designTheme.colors;
   fontsize?: 'sm' | 'md1' | 'md2' | 'b1' | 'b2';
   size?: 'sm' | 'md' | 'big' | 'big2';
   bold?: 'bold' | 'extraBold';
@@ -79,7 +73,6 @@ const TagSpan = styled.span<ITagSpanProps>`
   box-shadow: ${({ theme, shadow }) =>
     shadow ? theme.shadows[shadow] : 'none'};
 
-  font-family: pretendard;
   font-size: ${({ fontsize }) => {
     switch (fontsize) {
       case 'sm':

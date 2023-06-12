@@ -1,20 +1,33 @@
 import styled from '@emotion/styled';
 import { IChildProps } from '../shared/interfaces';
-
-// DISCUSSION : size 통일하기 99.17 | 49.59 | 30.99
+import { designTheme } from '../styles/theme';
 
 interface ITypoProps extends IChildProps {
-  fontSize: '2rem' | '1.5rem' | '1rem';
-  fontColor?: string;
+  fontSize?: keyof typeof designTheme.fontSize;
+  fontColor?: keyof typeof designTheme.colors;
 }
 
-const TypoAtom = ({ children, ...props }: ITypoProps) => {
-  return <Typo {...props}>{children}</Typo>;
+const TypoAtom = ({ children, fontColor, fontSize }: ITypoProps) => {
+  return (
+    <Typo fontColor={fontColor} fontSize={fontSize}>
+      {children}
+    </Typo>
+  );
 };
 
 export default TypoAtom;
 
 const Typo = styled.span<ITypoProps>`
-  color: ${(props) => props.fontColor ?? '#252222'};
-  font-size: ${(props) => props.fontSize};
+  color: ${({ fontColor }) =>
+    fontColor
+      ? designTheme.colors[fontColor]
+      : designTheme.colors.subFontColor};
+  font-size: ${({ fontSize }) =>
+    fontSize
+      ? designTheme.fontSize[fontSize].size
+      : designTheme.fontSize.body.size};
+  font-weight: ${({ fontSize }) =>
+    fontSize
+      ? designTheme.fontSize[fontSize].weight
+      : designTheme.fontSize.body.weight};
 `;

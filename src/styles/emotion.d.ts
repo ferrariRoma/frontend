@@ -1,23 +1,39 @@
 import '@emotion/react';
 
-declare module '@emotion/react' {
-  export interface DefaultTheme<T> {
-    colors: {
-      [name: T]: T;
-    };
-    shadows: {
-      [name: T]: T;
-    };
-  }
+interface fontSize {
+  size: string;
+  weight: number;
 }
 
 declare module '@emotion/react' {
-  export interface Theme<T> {
+  export interface Theme {
     colors: {
-      [name: string]: T;
+      bgColor: string;
+      titleColor: string;
+      subFontColor: string;
+      accentColor: string;
+      whiteWine: string;
+      white: string;
+      lightGrey: string;
+      bgYellow: string;
+      lightGrey_2: string;
     };
     shadows: {
-      [name: T]: T;
+      basic_shadow: string;
+      button_shadow: string;
+      emboss_shadow: string;
+    };
+    fontSize: {
+      h1: fontSize;
+      h2: fontSize;
+      h3: fontSize;
+      h4: fontSize;
+      h5: fontSize;
+      body: fontSize;
+      sub: fontSize;
+      tag: fontSize;
+      tooltip: fontSize;
+      switch: fontSize;
     };
   }
 }
