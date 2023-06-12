@@ -1,7 +1,6 @@
-import { DefaultTheme } from '@emotion/react';
+import { Theme } from '@emotion/react';
 
-// TODO : light테마에서 fontColor를 이걸로 해도 될까?... 고민해보자!
-export const colorTheme: DefaultTheme<string> = {
+export const designTheme: Theme = {
   colors: {
     bgColor: '#fad390',
     titleColor: '#4B86FA',
@@ -19,6 +18,18 @@ export const colorTheme: DefaultTheme<string> = {
     emboss_shadow:
       'inset 0px -10px 20px rgba(41, 32, 95, 0.33), inset 0px 10px 30px rgba(255, 255, 255, 0.44)',
   },
-};
+  fontSize: {
+    h1: { size: '6.198125rem', weight: 800 },
+    h2: { size: '3.099375rem', weight: 600 },
+    h3: { size: '2.324375rem', weight: 400 },
+    h4: { size: '1.936875rem', weight: 400 },
+    h5: { size: '1.549375rem', weight: 800 },
+    body: { size: '1.743125rem', weight: 400 },
+    sub: { size: '1.549375rem', weight: 400 },
+    tag: { size: '1.161875rem', weight: 400 },
+    tooltip: { size: '1.25rem', weight: 300 },
+    switch: { size: '1.161875rem', weight: 700 },
+  },
+} as const;
 
 // #e55039
