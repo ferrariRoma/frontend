@@ -87,6 +87,7 @@ const style = css`
     border: 0;
     font-size: 100%;
     font: inherit;
+    font-family: pretendard;
     vertical-align: baseline;
   }
   /* HTML5 display-role reset for older browsers */
@@ -128,7 +129,6 @@ const style = css`
 
   input {
     border: none;
-    font-family: 'Pretendard-Regular';
   }
   a {
     text-decoration: none;
@@ -200,11 +200,12 @@ const style = css`
   }
   body {
     font-size: 16px;
-    font-family: pretendard;
     /* 글씨 선택 안되게 하기 */
     -webkit-user-select: none; /* Chrome/Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+ */
+
+    position: relative;
   }
 `;
 

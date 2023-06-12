@@ -1,5 +1,10 @@
 import '@emotion/react';
 
+interface fontSize {
+  size: string;
+  weight: number;
+}
+
 declare module '@emotion/react' {
   export interface Theme {
     colors: {
@@ -17,6 +22,18 @@ declare module '@emotion/react' {
       basic_shadow: string;
       button_shadow: string;
       emboss_shadow: string;
+    };
+    fontSize: {
+      h1: fontSize;
+      h2: fontSize;
+      h3: fontSize;
+      h4: fontSize;
+      h5: fontSize;
+      body: fontSize;
+      sub: fontSize;
+      tag: fontSize;
+      tooltip: fontSize;
+      switch: fontSize;
     };
   }
 }
