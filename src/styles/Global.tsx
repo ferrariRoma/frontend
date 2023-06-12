@@ -209,6 +209,19 @@ const style = css`
   }
 `;
 
+export const rainbowStyle = css`
+  background: linear-gradient(
+      114.81deg,
+      #00c2ff 22.57%,
+      rgba(0, 117, 255, 0) 65.81%
+    ),
+    #fa00ff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+`;
+
 const GlobalStyle = () => {
   return <Global styles={style} />;
 };
