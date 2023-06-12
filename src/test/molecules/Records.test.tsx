@@ -2,13 +2,13 @@ import { render, waitFor } from '@testing-library/react';
 import React, { ReactNode } from 'react';
 import { Records, IRecordsProps } from '../../molecules';
 import { ThemeProvider } from '@emotion/react';
-import { colorTheme } from '../../styles/theme';
+import { designTheme } from '../../styles/theme';
 import { ITotalFocusTime } from '../../shared/interfaces';
 
 describe('Records', () => {
   function renderRecords(props: IRecordsProps) {
     return render(
-      <ThemeProvider theme={colorTheme}>
+      <ThemeProvider theme={designTheme}>
         <Records {...props} />
       </ThemeProvider>,
     );
@@ -53,10 +53,13 @@ describe('Records', () => {
 
     it('기록 데이터를 페치에 실패하고 알린다.', async () => {
       const fetchRecords = jest.fn(jest.fn().mockRejectedValue('failed'));
+      const windowAlert = jest
+        .spyOn(window, 'alert')
+        .mockImplementation(() => {});
       const { getByText } = renderRecords({ fetchRecords, isLogin: true });
       await waitFor(() => {
         expect(fetchRecords).toBeCalled();
-        expect(getByText(/데이터를 불러올 수 없습니다./)).not.toBeNull();
+        expect(windowAlert).toBeCalledTimes(1);
       });
     });
   });
