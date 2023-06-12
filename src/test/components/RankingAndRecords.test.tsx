@@ -1,10 +1,16 @@
 import { fireEvent, getByTestId, render } from '@testing-library/react';
 import React, { ReactNode } from 'react';
-import { RankingAndRecords, IRankingAndRecords } from '../../components';
+import { RankingAndRecords, IRankingAndRecordsProps } from '../../components';
+import { ThemeProvider } from '@emotion/react';
+import { colorTheme } from '../../styles/theme';
 
 describe('RankingAndRecords', () => {
-  function renderRankingAndRecords({ props }: IRankingAndRecords) {
-    return render(<RankingAndRecords {...props} />);
+  function renderRankingAndRecords(props: IRankingAndRecordsProps) {
+    return render(
+      <ThemeProvider theme={colorTheme}>
+        <RankingAndRecords {...props} />
+      </ThemeProvider>,
+    );
   }
 
   describe('처음 페이지가 렌더링 될 때', () => {
@@ -19,7 +25,6 @@ describe('RankingAndRecords', () => {
       const { getByRole, getByTestId } = renderRankingAndRecords({
         isLogin: true,
       });
-      //   fireEvent.click(getByRole('toggle-button'));
       const toggleButton = getByRole('button', {
         name: /나의 집중 기록/i,
       });
