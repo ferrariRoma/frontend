@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import { IRanking, ITotalFocusTime } from './interfaces';
 
 interface AxiosCustomRequest extends AxiosRequestConfig {
   retryCount: number;
@@ -49,6 +50,32 @@ baseApi.interceptors.response.use(
 export const usersApi = {
   login() {
     return baseApi.get('users/callback/google/start');
+  },
+  getRanking: async () => {
+    return {
+      group: [
+        {
+          '0~600': 0,
+          '600~1200': 0,
+          '1200~1800': 0,
+          '1800~2400': 0,
+          '2400~3000': 0,
+          '3000~3600': 1,
+          '3600~4200': 0,
+          '4200~4800': 0,
+          '4800~5400': 0,
+          '5400~6000': 0,
+        },
+      ],
+      user: {
+        id: 123,
+        time: 54321,
+      },
+    } as IRanking;
+  },
+  getRecords: async () => {
+    return { daily: 300, weekly: 400, monthly: 500 } as ITotalFocusTime;
+    // return baseApi.get('timer/progress');
   },
 };
 export const todosApi = {};
