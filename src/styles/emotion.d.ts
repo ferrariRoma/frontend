@@ -27,9 +27,11 @@ declare module '@emotion/react' {
       h1: fontSize;
       h2: fontSize;
       h3: fontSize;
+      h3_bold: fontSize;
       h4: fontSize;
       h5: fontSize;
       body: fontSize;
+      body_bold: fontSize;
       sub: fontSize;
       tag: fontSize;
       tooltip: fontSize;

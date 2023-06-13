@@ -1,15 +1,17 @@
 import styled from '@emotion/styled';
 import { IChildProps } from '../shared/interfaces';
 import { designTheme } from '../styles/theme';
+import { rainbowStyle } from '../styles/Global';
 
 interface ITypoProps extends IChildProps {
   fontSize?: keyof typeof designTheme.fontSize;
   fontColor?: keyof typeof designTheme.colors;
+  rainbow?: boolean;
 }
 
-const TypoAtom = ({ children, fontColor, fontSize }: ITypoProps) => {
+const TypoAtom = ({ children, fontColor, fontSize, rainbow }: ITypoProps) => {
   return (
-    <Typo fontColor={fontColor} fontSize={fontSize}>
+    <Typo fontColor={fontColor} fontSize={fontSize} rainbow={rainbow}>
       {children}
     </Typo>
   );
@@ -30,4 +32,5 @@ const Typo = styled.span<ITypoProps>`
     fontSize
       ? designTheme.fontSize[fontSize].weight
       : designTheme.fontSize.body.weight};
+  ${({ rainbow }) => rainbow && rainbowStyle};
 `;
