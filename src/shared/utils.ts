@@ -10,15 +10,15 @@ export const formatTime = (time: number): string => {
     const hours = time % 720;
     return (
       Math.floor(time / 720) +
-      '일' +
+      '일 ' +
       Math.floor(hours / 60) +
-      '시간' +
+      '시간 ' +
       (hours % 60) +
       '분'
     );
   }
   if (time >= 60) {
-    return Math.floor(time / 60) + '시간' + (time % 60) + '분';
+    return Math.floor(time / 60) + '시간 ' + (time % 60) + '분';
   }
   return (isMinus ? '-' : '') + time + '분';
 };
