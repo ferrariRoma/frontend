@@ -1,15 +1,19 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { IRanking, ITotalFocusTime } from './interfaces';
-import { AxiosResponse } from 'axios';
-import { Axios } from 'axios';
+import LoginEvent from './LoginEvent';
 
 interface AxiosCustomRequest extends AxiosRequestConfig {
   retryCount: number;
 }
 
+const LOGINEVENT = LoginEvent.getInstance();
+
 const MAX_RETRY_COUNT = 2;
+
 const baseApi = axios.create({
-  baseURL: `https://${process.env.REACT_APP_API_SERVER_URL}/api`,
+  // TODO : 배포 시 수정할 것
+  // baseURL: process.env.REACT_APP_API_SERVER_URL,
+  baseURL: `https://${process.env.REACT_APP_API_SERVER_URL_ORIGINAL}/api`,
   headers: {
     'content-type': 'application/json;charset=UTF-8',
     accept: 'application/json',
@@ -18,14 +22,14 @@ const baseApi = axios.create({
 });
 
 baseApi.interceptors.request.use((config) => {
-  const accessToken = localStorage.getItem('extreme-token');
-  const email = localStorage.getItem('extreme-email');
+  const accessToken = localStorage.getItem('extremeToken');
+  const email = localStorage.getItem('extremeEmail');
 
   if (config.headers) {
-    config.headers['extreme-token'] = accessToken
+    config.headers['extremeToken'] = accessToken
       ? (accessToken as string)
       : (false as boolean);
-    config.headers['extreme-email'] = email
+    config.headers['extremeEmail'] = email
       ? (email as string)
       : (false as boolean);
   }
@@ -50,8 +54,12 @@ baseApi.interceptors.response.use(
 );
 
 export const usersApi = {
-  login(): Promise<AxiosResponse<any, any>> {
-    return baseApi.get('users/callback/google/start');
+  async login() {
+    const data = window.open(
+      `http://${process.env.REACT_APP_API_SERVER_URL_TEST}/api/users/callback/google/start`,
+      '_self',
+    );
+    return data;
   },
   getRanking: async () => {
     return {
@@ -80,8 +88,9 @@ export const usersApi = {
     // return baseApi.get('timer/progress');
   },
   logout(): void {
-    localStorage.removeItem('extreme-email');
-    return localStorage.removeItem('extreme-token');
+    localStorage.removeItem('extremeEmail');
+    window.dispatchEvent(LOGINEVENT.getEvent());
+    return localStorage.removeItem('extremeToken');
   },
 };
 export const todosApi = {};
