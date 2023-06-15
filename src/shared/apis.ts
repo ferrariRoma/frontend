@@ -12,8 +12,7 @@ const MAX_RETRY_COUNT = 2;
 
 const baseApi = axios.create({
   // TODO : 배포 시 수정할 것
-  // baseURL: process.env.REACT_APP_API_SERVER_URL,
-  baseURL: `https://${process.env.REACT_APP_API_SERVER_URL_ORIGINAL}/api`,
+  baseURL: `https://${process.env.REACT_APP_API_SERVER_URL}/api`,
   headers: {
     'content-type': 'application/json;charset=UTF-8',
     accept: 'application/json',
@@ -56,7 +55,7 @@ baseApi.interceptors.response.use(
 export const usersApi = {
   async login() {
     const data = window.open(
-      `http://${process.env.REACT_APP_API_SERVER_URL_TEST}/api/users/callback/google/start`,
+      `http://${process.env.REACT_APP_API_SERVER_URL}/api/users/callback/google/start`,
       '_self',
     );
     return data;
