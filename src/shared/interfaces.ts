@@ -23,3 +23,8 @@ export interface IRanking {
     time: number;
   };
 }
+
+export interface ICategory {
+  name: string;
+  id: number;
+}

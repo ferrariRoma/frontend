@@ -140,6 +140,7 @@ const style = css`
     outline: none;
     border: none;
     background-color: transparent;
+    padding: 0;
   }
 
   body {
@@ -206,6 +207,17 @@ const style = css`
     -ms-user-select: none; /* IE10+ */
 
     position: relative;
+  }
+  html,
+  *,
+  body {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 `;
 

@@ -71,7 +71,7 @@ export const usersApi = {
       ],
       user: {
         id: 123,
-        time: 54321,
+        time: 5612,
       },
     } as IRanking;
   },
