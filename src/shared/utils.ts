@@ -6,7 +6,7 @@
 export const formatTime = (time: number): string => {
   const isMinus = time < 0;
   time = Math.abs(time);
-  if (time >= 720) {
+  if (time >= 6000) {
     const hours = time % 720;
     return (
       Math.floor(time / 720) +
