@@ -20,6 +20,7 @@ const RankingTextsContainer = styled.div`
   align-items: flex-start;
   flex-wrap: wrap;
   padding-top: 4rem;
+  padding-bottom: 2rem;
   gap: 1rem;
   .one_line {
     display: flex;
