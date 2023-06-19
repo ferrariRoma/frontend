@@ -2,23 +2,29 @@ import { render } from '@testing-library/react';
 import React, { ReactNode } from 'react';
 import { Ranking, IRankingProps } from '../../molecules';
 import { ThemeProvider } from '@emotion/react';
-import { colorTheme } from '../../styles/theme';
+import { designTheme } from '../../styles/theme';
+import { IRanking } from '../../shared/interfaces';
+import { dummyRanking } from '../../shared/constants';
 
 describe('Ranking', () => {
   function renderRanking(props: IRankingProps) {
     return render(
-      <ThemeProvider theme={colorTheme}>
+      <ThemeProvider theme={designTheme}>
         <Ranking {...props} />
       </ThemeProvider>,
     );
   }
 
-  // describe('모든 경우에', () => {
-  //   it('타이틀 텍스트를 렌더한다', () => {
-  //     const { getByText } = renderRanking({});
-  //     expect(getByText(/카테고리 별 랭킹/)).not.toBeNull();
-  //   });
-  // });
+  describe('모든 경우에', () => {
+    it('타이틀 텍스트를 렌더한다', () => {
+      const props = {
+        fetchRanking: jest.fn(jest.fn().mockResolvedValue({} as IRanking)),
+        isLogin: true,
+      };
+      const { getByText } = renderRanking(props);
+      expect(getByText(/카테고리 별 랭킹/)).not.toBeNull();
+    });
+  });
 
   // describe('로그인 하지 않은 경우', () => {
   //   it('LogInToUnlock을 렌더하고, 데이터를 페치하지 않는다.', () => {
