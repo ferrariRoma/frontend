@@ -1,9 +1,10 @@
 import { render, waitFor } from '@testing-library/react';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Records, IRecordsProps } from '../../molecules';
 import { ThemeProvider } from '@emotion/react';
 import { designTheme } from '../../styles/theme';
 import { ITotalFocusTime } from '../../shared/interfaces';
+import { AxiosResponse } from 'axios';
 
 describe('Records', () => {
   function renderRecords(props: IRecordsProps) {
@@ -36,12 +37,14 @@ describe('Records', () => {
     it('기록 데이터를 페치하고 기록 데이터를 렌더한다.', async () => {
       const fetchRecords = jest.fn(
         jest.fn().mockResolvedValue({
-          daily: 207,
-          weekly: 3098,
-          monthly: -20325,
-        } as ITotalFocusTime),
+          data: {
+            daily: 207,
+            weekly: 3098,
+            monthly: -20325,
+          } as ITotalFocusTime,
+        } as AxiosResponse<ITotalFocusTime>),
       );
-      const { getByText } = renderRecords({ fetchRecords, isLogin: false });
+      const { getByText } = renderRecords({ fetchRecords, isLogin: true });
 
       await waitFor(() => {
         expect(fetchRecords).toBeCalled();
@@ -56,7 +59,7 @@ describe('Records', () => {
       const windowAlert = jest
         .spyOn(window, 'alert')
         .mockImplementation(() => {});
-      const { getByText } = renderRecords({ fetchRecords, isLogin: true });
+      renderRecords({ fetchRecords, isLogin: true });
       await waitFor(() => {
         expect(fetchRecords).toBeCalled();
         expect(windowAlert).toBeCalledTimes(1);

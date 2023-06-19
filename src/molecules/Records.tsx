@@ -1,24 +1,22 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-import { CardAtom, TagAtom, TypoAtom } from '../atoms';
+import { useEffect, useState } from 'react';
+import { CardAtom, TypoAtom } from '../atoms';
 import { IChildProps, ITotalFocusTime } from '../shared/interfaces';
 import LogInToUnlock from './LogInToUnlock';
 import RecordCell from './RecordCell';
+import { AxiosResponse } from 'axios';
+import { dummyRecords, initialRecords } from '../shared/constants';
 
 export interface IRecordsProps extends IChildProps {
   isLogin: boolean;
-  fetchRecords: () => Promise<ITotalFocusTime>;
+  fetchRecords: () => Promise<AxiosResponse<ITotalFocusTime>>;
 }
 
 function Records({ isLogin, fetchRecords }: IRecordsProps) {
-  const [records, setRecords] = useState<ITotalFocusTime>({
-    daily: 0,
-    weekly: 0,
-    monthly: 0,
-  });
+  const [records, setRecords] = useState<ITotalFocusTime>(initialRecords);
 
   const fetchData = async () => {
     try {
-      const newRecords = await fetchRecords();
+      const { data: newRecords } = await fetchRecords();
       if (newRecords) {
         setRecords(() => newRecords);
       }
@@ -28,8 +26,8 @@ function Records({ isLogin, fetchRecords }: IRecordsProps) {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    isLogin ? fetchData() : setRecords(dummyRecords);
+  }, [isLogin]);
 
   return (
     <>
