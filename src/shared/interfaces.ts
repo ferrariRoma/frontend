@@ -16,6 +16,12 @@ export interface ITotalFocusTime {
   monthly: number;
 }
 
+export interface IRecords {
+  daily: number;
+  weekly: number;
+  monthly: number;
+}
+
 export interface IRanking {
   group: Record<string, number>[];
   user: {
