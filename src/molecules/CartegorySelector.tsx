@@ -18,14 +18,16 @@ function CartegorySelector({
     <CSContainer>
       {categories.map((category) => {
         return (
-          <TagAtom
-            styleOption={{
-              bg: category.id !== selected.id ? 'whiteWine' : 'titleColor',
-            }}
-            handler={selectHandler}
-          >
-            {category.name}
-          </TagAtom>
+          <div key={category.id + category.name}>
+            <TagAtom
+              styleOption={{
+                bg: category.id !== selected.id ? 'whiteWine' : 'titleColor',
+              }}
+              handler={selectHandler}
+            >
+              {category.name}
+            </TagAtom>
+          </div>
         );
       })}
     </CSContainer>

@@ -14,12 +14,12 @@ function RankingAndRecords({ children, isLogin }: IRankingAndRecordsProps) {
   const [isRanking, setIsRanking] = useState(true);
   // const [isRanking, setIsRanking] = useState(false);
   return (
-    <RNRContainer>
+    <RNRContainer data-testid={'records-component'}>
       <TagAtom
         handler={() => setIsRanking((prev) => !prev)}
         styleOption={{ shadow: 'button_shadow', bg: 'lightGrey_2' }}
       >
-        {isRanking ? '카테고리 별 랭킹' : '나의 집중 기록'}
+        {!isRanking ? '카테고리 별 랭킹' : '나의 집중 기록'}
       </TagAtom>
 
       <CardAtom padding="0rem" w="100%" h="100%">
