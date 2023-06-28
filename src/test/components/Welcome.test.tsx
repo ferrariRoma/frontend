@@ -1,16 +1,10 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import React from 'react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { Welcome } from '../../components/index';
 import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
-import { usersApi } from '../../shared/apis';
 import { ThemeProvider } from '@emotion/react';
 import { designTheme } from '../../styles/theme';
-import React from 'react';
+import { usersApi } from '../../shared/apis';
 
 jest.mock('../../shared/apis');
 
@@ -62,7 +56,7 @@ describe('Welcome', () => {
     it('클릭하면 removeItem을 호출한다.', () => {
       const logoutBtn = screen.getByText('SIGN OUT');
       fireEvent.click(logoutBtn);
-      expect(localStorage.removeItem).toBeCalled();
+      expect(usersApi.logout).toBeCalled();
     });
 
     it('셋팅 버튼이 렌더링 되어야 하고,', () => {
