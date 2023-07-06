@@ -51,9 +51,15 @@
     ]
   },
   "devDependencies": {
+    "@types/puppeteer": "^7.0.4",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-jest": "^27.2.2",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "2.8.7"
+    "eslint-plugin-testing-library": "^5.11.0",
+    "jest": "^27.5.1",
+    "jest-puppeteer": "^9.0.0",
+    "prettier": "2.8.7",
+    "puppeteer": "^20.7.4"
   }
 }
