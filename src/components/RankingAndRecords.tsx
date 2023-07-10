@@ -25,6 +25,7 @@ function RankingAndRecords({ children, isLogin }: IRankingAndRecordsProps) {
       <CardAtom padding="0rem" w="100%" h="100%">
         {isRanking ? (
           <Ranking
+            fetchCategories={usersApi.getCategories}
             fetchRanking={usersApi.getRanking}
             isLogin={isLogin}
           ></Ranking>
