@@ -12,6 +12,14 @@ export const dummyRecords: IRecords = {
   monthly: -5034,
 };
 
+export const initialRanking: IRanking = {
+  group: [{ '0': 0 }],
+  user: {
+    id: 0,
+    time: 0,
+  },
+};
+
 export const dummyRanking: IRanking = {
   group: [
     {
@@ -32,6 +40,8 @@ export const dummyRanking: IRanking = {
     time: 5612,
   },
 };
+
+export const initialCategories: ICategory[] = [{ name: '', id: 0 }];
 
 export const dummyCategories: ICategory[] = [
   { name: '공부', id: 0 },
