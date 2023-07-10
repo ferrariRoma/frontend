@@ -1,6 +1,7 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import LoginEvent from './LoginEvent';
 import { dummyRanking } from './constants';
+import { IRanking } from './interfaces';
 
 interface AxiosCustomRequest extends AxiosRequestConfig {
   retryCount: number;
@@ -60,11 +61,14 @@ export const usersApi = {
     );
     return data;
   },
-  getRanking: async () => {
-    return dummyRanking;
+  getRanking: async (category: string) => {
+    return baseApi.get('ranking', { params: { category } });
   },
   getRecords: async () => {
     return baseApi.get('timer/progress');
+  },
+  getCategories: async () => {
+    return baseApi.get('categories');
   },
   logout(): void {
     localStorage.removeItem('extremeEmail');
