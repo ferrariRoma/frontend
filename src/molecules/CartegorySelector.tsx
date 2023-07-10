@@ -4,9 +4,9 @@ import { TagAtom } from '../atoms';
 import { ICategory } from '../shared/interfaces';
 
 interface ICategorySelectorProps {
-  categories: ICategory[];
-  selected: ICategory;
-  selectHandler: () => void;
+  categories?: ICategory[];
+  selected?: ICategory;
+  selectHandler: (category: ICategory) => void;
 }
 
 function CartegorySelector({
@@ -16,20 +16,24 @@ function CartegorySelector({
 }: ICategorySelectorProps) {
   return (
     <CSContainer>
-      {categories.map((category) => {
-        return (
-          <div key={category.id + category.name}>
-            <TagAtom
-              styleOption={{
-                bg: category.id !== selected.id ? 'whiteWine' : 'titleColor',
-              }}
-              handler={selectHandler}
-            >
-              {category.name}
-            </TagAtom>
-          </div>
-        );
-      })}
+      {categories &&
+        selected &&
+        categories.map((category) => {
+          return (
+            <div key={category.id + category.name}>
+              <TagAtom
+                styleOption={{
+                  bg: category.id !== selected.id ? 'whiteWine' : 'titleColor',
+                }}
+                handler={() => {
+                  selectHandler(category);
+                }}
+              >
+                {category.name}
+              </TagAtom>
+            </div>
+          );
+        })}
     </CSContainer>
   );
 }
