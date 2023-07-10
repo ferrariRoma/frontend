@@ -7,9 +7,9 @@ export const formatTime = (time: number): string => {
   const isMinus = time < 0;
   time = Math.abs(time);
   if (time >= 6000) {
-    const hours = time % 720;
+    const hours = time % 1440;
     return (
-      Math.floor(time / 720) +
+      Math.floor(time / 1440) +
       '일 ' +
       Math.floor(hours / 60) +
       '시간 ' +
