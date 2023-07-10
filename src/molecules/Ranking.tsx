@@ -1,31 +1,77 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { CardAtom, TypoAtom } from '../atoms';
-import { IChildProps, IRanking } from '../shared/interfaces';
+import { ICategory, IChildProps, IRanking } from '../shared/interfaces';
 import RankingChart from './RankingChart';
 import LogInToUnlock from './LogInToUnlock';
 import styled from '@emotion/styled';
 import RankingTexts from './RankingTexts';
 import { formatTime } from '../shared/utils';
 import CartegorySelector from './CartegorySelector';
-import { dummyCategories } from '../shared/constants';
+import {
+  dummyCategories,
+  dummyRanking,
+  initialCategories,
+  initialRanking,
+} from '../shared/constants';
+import { AxiosResponse } from 'axios';
 
 export interface IRankingProps extends IChildProps {
-  fetchRanking: () => Promise<IRanking>;
+  fetchRanking: (category: string) => Promise<AxiosResponse<IRanking>>;
+  fetchCategories: () => Promise<AxiosResponse<ICategory[]>>;
   isLogin: boolean;
 }
 
-function Ranking({ children, fetchRanking, isLogin }: IRankingProps) {
+function Ranking({
+  children,
+  fetchRanking,
+  fetchCategories,
+  isLogin,
+}: IRankingProps) {
   const [ranking, setRanking] = useState<IRanking>();
+  const [categories, setCategories] = useState<ICategory[]>();
+  const [selectedCategory, setSelectedCategory] = useState<ICategory>();
 
-  const fetchData = async () => {
-    const newRanking = await fetchRanking();
-    if (newRanking) {
-      setRanking(() => newRanking);
+  const getCateData = async () => {
+    try {
+      const { data: newCategories } = await fetchCategories();
+      if (newCategories) setCategories(() => newCategories);
+      if (newCategories) setSelectedCategory(() => newCategories[0]);
+      console.log(newCategories);
+    } catch (error) {
+      window.alert('데이터를 불러올 수 없습니다.' + error);
     }
   };
+
+  const getRankData = async () => {
+    try {
+      if (selectedCategory) {
+        const { data: newRanking } = await fetchRanking(selectedCategory.name);
+        if (newRanking.group) {
+          setRanking(() => newRanking);
+        }
+      }
+    } catch (error) {
+      window.alert('데이터를 불러올 수 없습니다.' + error);
+    }
+  };
+
+  const selectCategory = (category: ICategory) => {
+    setSelectedCategory(() => category);
+  };
+
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (isLogin) {
+      getCateData();
+    } else {
+      setCategories(dummyCategories);
+      setSelectedCategory(dummyCategories[0]);
+      setRanking(dummyRanking);
+    }
+  }, [isLogin]);
+
+  useEffect(() => {
+    isLogin && getRankData();
+  }, [selectedCategory, isLogin]);
 
   return (
     <>
@@ -56,33 +102,35 @@ function Ranking({ children, fetchRanking, isLogin }: IRankingProps) {
                   shadow: 'button_shadow',
                 }}
               >
-                {'개발'}
+                {selectedCategory?.name ?? '카테고리'}
               </RankingTexts.Tag>
               <RankingTexts.Typo fontSize={'h3'}>에</RankingTexts.Typo>
             </div>
             <div className="one_line time">
-              {formatTime(ranking?.user.time ?? 0)
-                .split(/(\d+)/)
-                .slice(1)
-                .map((text, idx) => {
-                  return (
-                    <RankingTexts.Typo
-                      fontSize={idx % 2 === 0 ? 'h1' : 'h3_bold'}
-                      key={idx + text}
-                    >
-                      {text}
-                    </RankingTexts.Typo>
-                  );
-                })}
+              {ranking?.user ? (
+                formatTime(ranking.user.time ?? 0)
+                  .split(/(\d+)/)
+                  .slice(1)
+                  .map((text, idx) => {
+                    return (
+                      <RankingTexts.Typo
+                        fontSize={idx % 2 === 0 ? 'h1' : 'h3_bold'}
+                        key={idx + text}
+                      >
+                        {text}
+                      </RankingTexts.Typo>
+                    );
+                  })
+              ) : (
+                <RankingTexts.Typo fontSize="h1">{'0분'}</RankingTexts.Typo>
+              )}
             </div>
             <RankingTexts.Typo fontSize={'h3'}>집중했어요.</RankingTexts.Typo>
           </RankingTexts>
           <CartegorySelector
-            categories={dummyCategories}
-            selected={dummyCategories[1]}
-            selectHandler={() => {
-              console.log('카테고리 클릭됨');
-            }}
+            categories={categories}
+            selected={selectedCategory}
+            selectHandler={selectCategory}
           />
         </RankingLeftContainer>
 
@@ -95,11 +143,18 @@ function Ranking({ children, fetchRanking, isLogin }: IRankingProps) {
             padding="1.5rem"
             style={{ display: 'block', boxSizing: 'border-box' }}
           >
-            {ranking && (
+            {ranking?.group.length ? (
               <RankingChart
-                options={Object.keys(ranking?.group[0])}
-                series={Object.values(ranking?.group[0])}
+                options={Object.keys(ranking.group[0])}
+                series={Object.values(ranking.group[0])}
               />
+            ) : (
+              <NoData>
+                <TypoAtom fontSize="h2" fontColor="titleColor">
+                  랭킹 데이터가 없어요.
+                </TypoAtom>
+                <TypoAtom>할 일을 완료하고 확인해보세요!</TypoAtom>
+              </NoData>
             )}
           </Ranking.CardAtom>
         </RankingRightContainer>
@@ -149,6 +204,16 @@ const RankingRightContainer = styled.div`
   height: auto;
   grid-column: 2 / 4;
   box-sizing: border-box;
+`;
+
+const NoData = styled.div`
+  width: inherit;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
 `;
 
 export default Ranking;
