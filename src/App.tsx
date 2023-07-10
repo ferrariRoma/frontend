@@ -1,9 +1,11 @@
 import { RankingAndRecords } from './components';
 import { useEffect } from 'react';
 import Welcome from './components/Welcome';
-import { setToken } from './hooks/useCheckLogin';
+import useCheckLogin, { setToken } from './hooks/useCheckLogin';
+import styled from '@emotion/styled';
 
 function App() {
+  const isLogin = useCheckLogin();
   useEffect(() => {
     const pathname = window.location.pathname;
     if (Object.is(pathname, '/oauth')) {
@@ -27,11 +29,20 @@ function App() {
   }, []);
 
   return (
-    <>
+    <MainContainer>
       <Welcome />
-      <RankingAndRecords isLogin={true} />
-    </>
+      <RankingAndRecords isLogin={isLogin} />
+    </MainContainer>
   );
 }
+
+const MainContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+`;
 
 export default App;
