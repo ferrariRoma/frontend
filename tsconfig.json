@@ -18,6 +18,5 @@
     "removeComments": true
   },
   "include": ["src"],
-  // "exclude": []
   "exclude": ["src/test"]
 }

@@ -30,6 +30,8 @@ module.exports = {
         'plugin:jest/recommended',
         'plugin:jest-dom/recommended',
         'plugin:testing-library/react',
+        // 'plugin:jest-puppeteer/recommended',
+        // 'plugin:expect-puppeteer/recommended',
       ],
     },
   ],
