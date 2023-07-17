@@ -1,6 +1,3 @@
-/**
- * @jest-environment puppeteer
- */
 import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { Welcome } from '../../components/index';
@@ -9,7 +6,6 @@ import { ThemeProvider } from '@emotion/react';
 import { designTheme } from '../../styles/theme';
 import { usersApi } from '../../shared/apis';
 import 'expect-puppeteer';
-import puppeteer, { Browser, Page } from 'puppeteer';
 
 jest.mock('../../shared/apis'); // TODO : spyOn으로 대체할 수 있지 않을까?
 
@@ -47,15 +43,9 @@ describe('Welcome', () => {
   });
 
   describe('유저가 로그인 버튼을 눌렀을 때', () => {
-    // let browser: Browser;
-    // let page: Page;
-    beforeAll(async () => {
-      await page.goto('http://localhost:3000');
-      // browser = await puppeteer.launch();
-      // page = await browser.newPage();
-    });
-
     it('구글 로그인 페이지로 가야 한다.', async () => {
+      // const page = await browser.newPage();
+      await page.goto('http://localhost:3000');
       const test = await page.$('span');
       expect(test).not.toBeNull();
     });
