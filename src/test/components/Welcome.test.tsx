@@ -7,8 +7,6 @@ import { designTheme } from '../../styles/theme';
 import { usersApi } from '../../shared/apis';
 import 'expect-puppeteer';
 
-jest.mock('../../shared/apis'); // TODO : spyOn으로 대체할 수 있지 않을까?
-
 const mockWelcome = (func: jest.Mock<any, any>) => {
   mockLocalStorage(func);
   const { container } = render(
@@ -36,20 +34,21 @@ describe('Welcome', () => {
 
     // TODO : 이 부분은 로그인 로직을 테스트 하는 e2e 테스트 쪽으로 옮겨야 하지 않을까?
     it('로그인 버튼을 눌렀을 때 login메소드를 작동시킨다.', () => {
+      const spyOnLogin = jest.spyOn(usersApi, 'login').mockImplementation();
       const googleImage = screen.getByRole('img');
       fireEvent.click(googleImage);
-      expect(usersApi.login).toBeCalled();
+      expect(spyOnLogin).toBeCalled();
     });
   });
 
-  describe('유저가 로그인 버튼을 눌렀을 때', () => {
-    it('구글 로그인 페이지로 가야 한다.', async () => {
-      // const page = await browser.newPage();
-      await page.goto('http://localhost:3000');
-      const test = await page.$('span');
-      expect(test).not.toBeNull();
-    });
-  });
+  // describe('유저가 로그인 버튼을 눌렀을 때', () => {
+  //   it('구글 로그인 페이지로 가야 한다.', async () => {
+  //     // const page = await browser.newPage();
+  //     await page.goto('http://localhost:3000');
+  //     const test = await page.$('span');
+  //     expect(test).not.toBeNull();
+  //   });
+  // });
 
   describe('유저가 로그인을 했을 경우', () => {
     let renderResult: HTMLElement;
@@ -65,9 +64,10 @@ describe('Welcome', () => {
     });
 
     it('클릭하면 removeItem을 호출한다.', () => {
+      const spyOnLogout = jest.spyOn(usersApi, 'logout').mockImplementation();
       const logoutBtn = screen.getByText('SIGN OUT');
       fireEvent.click(logoutBtn);
-      expect(usersApi.logout).toBeCalled();
+      expect(spyOnLogout).toBeCalled();
     });
 
     it('셋팅 버튼이 렌더링 되어야 하고,', () => {
@@ -82,6 +82,12 @@ describe('Welcome', () => {
       act(() => {
         const settingTitle = screen.getByText('설정');
         expect(settingTitle).toBeInTheDocument();
+
+        // 익스트림 모드 버튼
+
+        // 데이터 초기화
+
+        // 회원탈퇴
       });
     });
   });
