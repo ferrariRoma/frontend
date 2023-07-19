@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CardAtom, TagAtom } from '../atoms';
 import { IChildProps } from '../shared/interfaces';
-import { Records } from '../molecules';
+import { Records, Ranking } from '../molecules';
 import { usersApi } from '../shared/apis';
 import styled from '@emotion/styled';
 
@@ -11,24 +11,24 @@ export interface IRankingAndRecordsProps extends IChildProps {
 
 function RankingAndRecords({ children, isLogin }: IRankingAndRecordsProps) {
   //TODO: 테스트용 주석 삭제 필요
-  // const [isRanking, setIsRanking] = useState(true);
-  const [isRanking, setIsRanking] = useState(false);
+  const [isRanking, setIsRanking] = useState(true);
+  // const [isRanking, setIsRanking] = useState(false);
   return (
-    <RNRContainer>
+    <RNRContainer data-testid={'records-component'}>
       <TagAtom
         handler={() => setIsRanking((prev) => !prev)}
         styleOption={{ shadow: 'button_shadow', bg: 'lightGrey_2' }}
       >
-        {isRanking ? '카테고리 별 랭킹' : '나의 집중 기록'}
+        {!isRanking ? '카테고리 별 랭킹' : '나의 집중 기록'}
       </TagAtom>
 
-      <CardAtom padding="0rem" w="100%">
+      <CardAtom padding="0rem" w="100%" h="100%">
         {isRanking ? (
-          // <Ranking
-          //   fetchRanking={usersApi.getRanking}
-          //   isLogin={isLogin}
-          // ></Ranking>
-          <></>
+          <Ranking
+            fetchCategories={usersApi.getCategories}
+            fetchRanking={usersApi.getRanking}
+            isLogin={isLogin}
+          ></Ranking>
         ) : (
           <Records isLogin={isLogin} fetchRecords={usersApi.getRecords} />
         )}
@@ -50,7 +50,7 @@ const RNRContainer = styled.div`
 `;
 
 RankingAndRecords.CardAtom = CardAtom;
-// RankingAndRecords.Ranking = Ranking;
+RankingAndRecords.Ranking = Ranking;
 RankingAndRecords.Records = Records;
 
 export default RankingAndRecords;

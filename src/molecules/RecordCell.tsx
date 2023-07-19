@@ -3,6 +3,7 @@ import React from 'react';
 import { TagAtom, TypoAtom } from '../atoms';
 import { IChildProps } from '../shared/interfaces';
 import { css } from '@emotion/react';
+import { formatTime } from '../shared/utils';
 
 interface IRankingProps extends IChildProps {
   label: string;
@@ -40,32 +41,12 @@ function RecordCell({ children, label, record }: IRankingProps) {
           {record > 0 ? '+' + record.toLocaleString() : record.toLocaleString()}
         </RecordCell.RecordTypo>
         <RecordCell.bodyTypo fontSize={'h3'}>
-          분 ({formatRecord(record)})
+          분 ({formatTime(record)})
         </RecordCell.bodyTypo>
       </div>
     </div>
   );
 }
-
-const formatRecord = (record: number): string => {
-  const isMinus = record < 0;
-  record = Math.abs(record);
-  if (record >= 720) {
-    const hours = record % 720;
-    return (
-      Math.floor(record / 720) +
-      '일' +
-      Math.floor(hours / 60) +
-      '시간' +
-      (hours % 60) +
-      '분'
-    );
-  }
-  if (record >= 60) {
-    return Math.floor(record / 60) + '시간' + (record % 60) + '분';
-  }
-  return (isMinus ? '-' : '') + record + '분';
-};
 
 RecordCell.RecordLabel = TagAtom;
 RecordCell.RecordTypo = TypoAtom;
