@@ -1,11 +1,14 @@
-import styled from '@emotion/styled';
-import { BtnAtom, GoogleLoginAtom, TypoAtom } from '../atoms';
-import { usersApi } from '../shared/apis';
-import { useCheckLogin } from '../hooks';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
+
+import { BtnAtom, GoogleLoginAtom, TypoAtom } from '../atoms';
 import Modal from './Modal';
 import SettingModal from './SettingModal';
+
+import { usersApi } from '../shared/apis';
+import { useCheckLogin } from '../hooks';
+
+import styled from '@emotion/styled';
 
 const Welcome = () => {
   const [isModal, setIsModal] = useState<boolean>(false);

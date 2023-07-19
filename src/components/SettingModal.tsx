@@ -1,8 +1,11 @@
-import styled from '@emotion/styled';
-import { SwitchAtom, TagAtom, TypoAtom } from '../atoms';
 import { useState } from 'react';
-import { usersApi } from '../shared/apis';
+
+import { SwitchAtom, TagAtom, TypoAtom } from '../atoms';
 import IconAtom from '../atoms/IconAtom';
+
+import { usersApi } from '../shared/apis';
+
+import styled from '@emotion/styled';
 
 // TODO : state를 상위 컴포넌트로 뽑아낼 수는 없을까?.. 그게 더 괜찮은 방법이지 않을까?..
 // TODO : 추가적으로 이런 모양의 선택지를 템플릿으로 뽑아낼 수는 없을까?
