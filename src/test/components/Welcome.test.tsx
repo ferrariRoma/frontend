@@ -1,16 +1,13 @@
 import React from 'react';
-import {
-  act,
-  fireEvent,
-  getByText,
-  render,
-  screen,
-} from '@testing-library/react';
 import { Welcome } from '../../components/index';
-import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
+
 import { ThemeProvider } from '@emotion/react';
 import { designTheme } from '../../styles/theme';
 import { usersApi } from '../../shared/apis';
+
+import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
+
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import 'expect-puppeteer';
 
 const mockWelcome = (func: jest.Mock<any, any>) => {
@@ -88,17 +85,6 @@ describe('Welcome', () => {
       act(() => {
         const settingTitle = screen.getByText('설정');
         expect(settingTitle).toBeInTheDocument();
-
-        // 익스트림 모드 버튼
-        const extremeOffBtn = screen.getByText('OFF');
-        expect(extremeOffBtn).toBeInTheDocument();
-        // 이 방법 말고 스위치 버튼 자체를 찾아서 그 안에 off 와 on이 있는지 확인하자
-        // 지금 방법으로 하면 getByText('ON');을 또 해야 한다
-        // fireEvent.click(extremeBtn);
-
-        // 데이터 초기화
-
-        // 회원탈퇴
       });
     });
   });
@@ -113,8 +99,4 @@ it
   로그인 과정에서 에러가 발생한다면
 it
   에러 메시지를 출력해준다.
-*/
-
-/*
-[ ] 셋팅 모달 테스트 작성하기
 */
