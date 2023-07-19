@@ -11,8 +11,8 @@ const Welcome = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const isLogin = useCheckLogin();
 
-  const handleLoginBtn = async () => {
-    return await usersApi.login();
+  const handleLoginBtn = () => {
+    return usersApi.login();
   };
 
   const handleLogoutBtn = (): void => {

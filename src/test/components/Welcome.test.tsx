@@ -1,5 +1,11 @@
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  getByText,
+  render,
+  screen,
+} from '@testing-library/react';
 import { Welcome } from '../../components/index';
 import { mockLocalStorage } from '../../../fixture/mockLocalStorage';
 import { ThemeProvider } from '@emotion/react';
@@ -84,6 +90,11 @@ describe('Welcome', () => {
         expect(settingTitle).toBeInTheDocument();
 
         // 익스트림 모드 버튼
+        const extremeOffBtn = screen.getByText('OFF');
+        expect(extremeOffBtn).toBeInTheDocument();
+        // 이 방법 말고 스위치 버튼 자체를 찾아서 그 안에 off 와 on이 있는지 확인하자
+        // 지금 방법으로 하면 getByText('ON');을 또 해야 한다
+        // fireEvent.click(extremeBtn);
 
         // 데이터 초기화
 

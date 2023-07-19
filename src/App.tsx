@@ -20,9 +20,6 @@ function App() {
         setToken(userinfo.extremeToken, userinfo.email);
         history.replaceState('', '', process.env.REACT_APP_API_CLIENT_URL);
       }
-
-      // TODO : 프론트엔드 웰컴 테스트 코드 확인 E2E
-      // TODO : 나중에 이슈로 만들기
     }
   }, []);
 

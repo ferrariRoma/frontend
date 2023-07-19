@@ -53,7 +53,7 @@ baseApi.interceptors.response.use(
 );
 
 export const usersApi = {
-  async login() {
+  login() {
     const data = window.open(
       `http://${process.env.REACT_APP_API_SERVER_URL}/api/users/callback/google/start`,
       '_self',
