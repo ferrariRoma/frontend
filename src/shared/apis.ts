@@ -3,6 +3,8 @@ import LoginEvent from './LoginEvent';
 import { dummyRanking } from './constants';
 import { IRanking } from './interfaces';
 
+const SERVER_URL = process.env.REACT_APP_API_SERVER_URL;
+
 interface AxiosCustomRequest extends AxiosRequestConfig {
   retryCount: number;
 }
@@ -13,7 +15,7 @@ const MAX_RETRY_COUNT = 2;
 
 const baseApi = axios.create({
   // TODO : 배포 시 수정할 것
-  baseURL: `https://${process.env.REACT_APP_API_SERVER_URL}/api`,
+  baseURL: 'https://' + SERVER_URL + 'api',
   headers: {
     'content-type': 'application/json;charset=UTF-8',
     accept: 'application/json',
@@ -27,11 +29,9 @@ baseApi.interceptors.request.use((config) => {
 
   if (config.headers) {
     config.headers['extreme-token'] = accessToken
-      ? (accessToken as string)
+      ? accessToken
       : (false as boolean);
-    config.headers['extreme-email'] = email
-      ? (email as string)
-      : (false as boolean);
+    config.headers['extreme-email'] = email ? email : (false as boolean);
   }
   return config;
 });
@@ -56,7 +56,7 @@ baseApi.interceptors.response.use(
 export const usersApi = {
   login() {
     const data = window.open(
-      `http://${process.env.REACT_APP_API_SERVER_URL}/api/users/callback/google/start`,
+      'http://' + SERVER_URL + '/api/users/callback/google/start',
       '_self',
     );
     return data;
