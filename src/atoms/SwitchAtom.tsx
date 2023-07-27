@@ -37,6 +37,7 @@ const Switch = styled(motion.div)`
 const SwitchContainter = styled.div<Partial<ISwitchAtomProps>>`
   background-color: ${({ theme: { colors } }) => colors.whiteWine};
   width: 5.5rem;
+  min-width: 4.5rem;
   height: 2.5rem;
   border-radius: 2.5rem;
   display: flex;

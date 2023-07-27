@@ -49,10 +49,11 @@ const ModalContainer = styled(CardAtom)`
   padding: 2.324375 3.2925;
 
   position: absolute;
-  z-index: 99;
+  z-index: 11;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  overflow: visible;
 `;
 
 const HeaderContainer = styled.div`
