@@ -61,6 +61,15 @@ export const usersApi = {
     );
     return data;
   },
+  logout(): void {
+    localStorage.removeItem('extremeEmail');
+    window.dispatchEvent(LOGINEVENT.getEvent());
+    localStorage.removeItem('extremeToken');
+  },
+  async withdrawal() {
+    await baseApi.post('users/revoke');
+  },
+  // QUESTION : 아래 3개는 todos에 들어가야 될 메소드가 아닐까?
   getRanking: async (category: string) => {
     return baseApi.get('ranking', { params: { category } });
   },
@@ -70,12 +79,11 @@ export const usersApi = {
   getCategories: async () => {
     return baseApi.get('categories');
   },
-  logout(): void {
-    localStorage.removeItem('extremeEmail');
-    window.dispatchEvent(LOGINEVENT.getEvent());
-    return localStorage.removeItem('extremeToken');
+};
+export const todosApi = {
+  async reset() {
+    await baseApi.delete('todos/reset');
   },
 };
-export const todosApi = {};
 export const timerApi = {};
 export const settingsApi = {};
