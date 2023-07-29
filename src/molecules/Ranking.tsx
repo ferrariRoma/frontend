@@ -34,8 +34,8 @@ function Ranking({
   const getCateData = async () => {
     try {
       const { data: newCategories } = await fetchCategories();
-      if (newCategories) setCategories(() => newCategories);
-      if (newCategories) setSelectedCategory(() => newCategories[0]);
+      if (newCategories) setCategories(newCategories);
+      if (newCategories) setSelectedCategory(newCategories[0]);
       console.log(newCategories);
     } catch (error) {
       window.alert('데이터를 불러올 수 없습니다.' + error);
@@ -47,7 +47,7 @@ function Ranking({
       if (selectedCategory) {
         const { data: newRanking } = await fetchRanking(selectedCategory.name);
         if (newRanking.group) {
-          setRanking(() => newRanking);
+          setRanking(newRanking);
         }
       }
     } catch (error) {
@@ -56,7 +56,7 @@ function Ranking({
   };
 
   const selectCategory = (category: ICategory) => {
-    setSelectedCategory(() => category);
+    setSelectedCategory(category);
   };
 
   useEffect(() => {

@@ -18,7 +18,7 @@ function Records({ isLogin, fetchRecords }: IRecordsProps) {
     try {
       const { data: newRecords } = await fetchRecords();
       if (newRecords) {
-        setRecords(() => newRecords);
+        setRecords(newRecords);
       }
     } catch {
       window.alert('데이터를 불러올 수 없습니다.');
