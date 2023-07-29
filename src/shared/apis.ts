@@ -15,7 +15,7 @@ const MAX_RETRY_COUNT = 2;
 
 const baseApi = axios.create({
   // TODO : 배포 시 수정할 것
-  baseURL: 'https://' + SERVER_URL + 'api',
+  baseURL: 'https://' + SERVER_URL + '/api',
   headers: {
     'content-type': 'application/json;charset=UTF-8',
     accept: 'application/json',
