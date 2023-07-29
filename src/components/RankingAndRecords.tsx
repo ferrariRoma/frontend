@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CardAtom, TagAtom } from '../atoms';
 import { IChildProps } from '../shared/interfaces';
 import { Records, Ranking } from '../organisms';
-import { usersApi } from '../shared/apis';
+import { todosApi } from '../shared/apis';
 import styled from '@emotion/styled';
 
 export interface IRankingAndRecordsProps extends IChildProps {
@@ -25,12 +25,12 @@ function RankingAndRecords({ children, isLogin }: IRankingAndRecordsProps) {
       <CardAtom padding="0rem" w="100%" h="100%">
         {isRanking ? (
           <Ranking
-            fetchCategories={usersApi.getCategories}
-            fetchRanking={usersApi.getRanking}
+            fetchCategories={todosApi.getCategories}
+            fetchRanking={todosApi.getRanking}
             isLogin={isLogin}
           ></Ranking>
         ) : (
-          <Records isLogin={isLogin} fetchRecords={usersApi.getRecords} />
+          <Records isLogin={isLogin} fetchRecords={todosApi.getRecords} />
         )}
       </CardAtom>
     </RNRContainer>

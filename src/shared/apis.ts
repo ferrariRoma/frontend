@@ -61,6 +61,15 @@ export const usersApi = {
     );
     return data;
   },
+
+  logout(): void {
+    localStorage.removeItem('extremeEmail');
+    window.dispatchEvent(LOGINEVENT.getEvent());
+    return localStorage.removeItem('extremeToken');
+  },
+};
+
+export const todosApi = {
   getRanking: async (category: string) => {
     return baseApi.get('ranking', { params: { category } });
   },
@@ -70,12 +79,7 @@ export const usersApi = {
   getCategories: async () => {
     return baseApi.get('categories');
   },
-  logout(): void {
-    localStorage.removeItem('extremeEmail');
-    window.dispatchEvent(LOGINEVENT.getEvent());
-    return localStorage.removeItem('extremeToken');
-  },
 };
-export const todosApi = {};
+
 export const timerApi = {};
 export const settingsApi = {};
