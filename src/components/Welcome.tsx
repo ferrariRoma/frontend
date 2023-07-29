@@ -1,18 +1,21 @@
-import styled from '@emotion/styled';
-import { BtnAtom, GoogleLoginAtom, TypoAtom } from '../atoms';
-import { usersApi } from '../shared/apis';
-import { useCheckLogin } from '../hooks';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
+
+import { BtnAtom, GoogleLoginAtom, TypoAtom } from '../atoms';
 import Modal from './Modal';
 import SettingModal from './SettingModal';
+
+import { usersApi } from '../shared/apis';
+import { useCheckLogin } from '../hooks';
+
+import styled from '@emotion/styled';
 
 const Welcome = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const isLogin = useCheckLogin();
 
-  const handleLoginBtn = async () => {
-    return await usersApi.login();
+  const handleLoginBtn = () => {
+    return usersApi.login();
   };
 
   const handleLogoutBtn = (): void => {
@@ -85,7 +88,6 @@ const WelcomeContainer = styled.div`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
   }
 `;
 

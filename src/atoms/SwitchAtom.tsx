@@ -1,6 +1,7 @@
-import styled from '@emotion/styled';
-import { motion } from 'framer-motion';
 import TypoAtom from './TypoAtom';
+
+import { motion } from 'framer-motion';
+import styled from '@emotion/styled';
 
 interface ISwitchAtomProps {
   value: boolean;
@@ -12,6 +13,7 @@ function SwitchAtom({ value, setValue }: ISwitchAtomProps) {
     <SwitchContainter value={value} onClick={setValue}>
       <Switch layout>
         <TypoAtom fontColor={'titleColor'} fontSize={'tag'}>
+          {/* TODO : string을 외부에서 주입받을 수 있도록 하기 -> 확장성이 더 개선되고 아톰이라는 말에 더 어울림 */}
           {value ? `ON` : `OFF`}
         </TypoAtom>
       </Switch>
@@ -35,6 +37,7 @@ const Switch = styled(motion.div)`
 const SwitchContainter = styled.div<Partial<ISwitchAtomProps>>`
   background-color: ${({ theme: { colors } }) => colors.whiteWine};
   width: 5.5rem;
+  min-width: 4.5rem;
   height: 2.5rem;
   border-radius: 2.5rem;
   display: flex;
