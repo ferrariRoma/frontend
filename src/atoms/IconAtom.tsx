@@ -1,13 +1,13 @@
-import { IChildProps } from '../shared/interfaces';
-import { designTheme } from '../styles/theme';
 import styled from '@emotion/styled';
+import { designTheme } from '../styles/theme';
+import { ReactElement } from 'react';
 
 interface IIconAtomProps
-  extends IChildProps,
-    Pick<
-      React.DOMAttributes<HTMLDivElement>,
-      'onClick' | 'onMouseOver' | 'onMouseLeave'
-    > {
+  extends Pick<
+    React.DOMAttributes<HTMLDivElement>,
+    'onClick' | 'onMouseOver' | 'onMouseLeave'
+  > {
+  children: ReactElement<HTMLImageElement>;
   size?: number;
   backgroundColor?: keyof typeof designTheme.colors | 'transparent';
 }
@@ -30,8 +30,8 @@ export default IconAtom;
 const IconContainer = styled.div<
   Pick<IIconAtomProps, 'size' | 'backgroundColor'>
 >`
-  height: ${({ size }) => `${size}rem`};
-  width: ${({ size }) => `${size}rem`};
+  height: ${({ size }) => (size ? `${size}rem` : `4.455rem`)};
+  width: ${({ size }) => (size ? `${size}rem` : `4.455rem`)};
   border-radius: ${({ size }) => (size ? `${size * 0.5}rem` : null)};
   display: flex;
   justify-content: center;
