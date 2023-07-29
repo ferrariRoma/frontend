@@ -1,6 +1,6 @@
 import { render, waitFor } from '@testing-library/react';
 import React from 'react';
-import { Records, IRecordsProps } from '../../molecules';
+import { Records, IRecordsProps } from '../../organisms';
 import { ThemeProvider } from '@emotion/react';
 import { designTheme } from '../../styles/theme';
 import { ITotalFocusTime } from '../../shared/interfaces';

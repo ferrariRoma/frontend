@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CardAtom, TagAtom } from '../atoms';
 import { IChildProps } from '../shared/interfaces';
-import { Records, Ranking } from '../molecules';
+import { Records, Ranking } from '../organisms';
 import { usersApi } from '../shared/apis';
 import styled from '@emotion/styled';
 

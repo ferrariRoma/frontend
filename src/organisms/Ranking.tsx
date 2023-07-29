@@ -1,12 +1,12 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { CardAtom, TypoAtom } from '../atoms';
 import { ICategory, IChildProps, IRanking } from '../shared/interfaces';
-import RankingChart from './RankingChart';
-import LogInToUnlock from './LogInToUnlock';
+import RankingChart from '../molecules/RankingChart';
+import LogInToUnlock from '../molecules/LogInToUnlock';
 import styled from '@emotion/styled';
-import RankingTexts from './RankingTexts';
+import RankingTexts from '../molecules/RankingTexts';
 import { formatTime } from '../shared/utils';
-import CartegorySelector from './CartegorySelector';
+import CartegorySelector from '../molecules/CartegorySelector';
 import {
   dummyCategories,
   dummyRanking,
