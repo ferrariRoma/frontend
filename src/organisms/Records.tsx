@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { CardAtom, TypoAtom } from '../atoms';
 import { IChildProps, ITotalFocusTime } from '../shared/interfaces';
-import LogInToUnlock from './LogInToUnlock';
-import RecordCell from './RecordCell';
+import LogInToUnlock from '../molecules/LogInToUnlock';
+import RecordCell from '../molecules/RecordCell';
 import { AxiosResponse } from 'axios';
 import { dummyRecords, initialRecords } from '../shared/constants';
 
@@ -18,7 +18,7 @@ function Records({ isLogin, fetchRecords }: IRecordsProps) {
     try {
       const { data: newRecords } = await fetchRecords();
       if (newRecords) {
-        setRecords(() => newRecords);
+        setRecords(newRecords);
       }
     } catch {
       window.alert('데이터를 불러올 수 없습니다.');

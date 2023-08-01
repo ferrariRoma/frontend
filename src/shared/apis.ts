@@ -15,7 +15,7 @@ const MAX_RETRY_COUNT = 2;
 
 const baseApi = axios.create({
   // TODO : 배포 시 수정할 것
-  baseURL: 'https://' + SERVER_URL + 'api',
+  baseURL: 'https://' + SERVER_URL + '/api',
   headers: {
     'content-type': 'application/json;charset=UTF-8',
     accept: 'application/json',
@@ -69,7 +69,9 @@ export const usersApi = {
   async withdrawal() {
     await baseApi.post('users/revoke');
   },
-  // QUESTION : 아래 3개는 todos에 들어가야 될 메소드가 아닐까?
+};
+
+export const todosApi = {
   getRanking: async (category: string) => {
     return baseApi.get('ranking', { params: { category } });
   },
@@ -79,8 +81,6 @@ export const usersApi = {
   getCategories: async () => {
     return baseApi.get('categories');
   },
-};
-export const todosApi = {
   async reset() {
     await baseApi.delete('todos/reset');
   },
