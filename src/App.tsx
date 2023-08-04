@@ -1,4 +1,4 @@
-import { RankingAndRecords } from './components';
+import { RankingAndRecords, TodoListModal } from './components';
 import { useEffect } from 'react';
 import Welcome from './components/Welcome';
 import useCheckLogin, { setToken } from './hooks/useCheckLogin';
@@ -29,6 +29,7 @@ function App() {
     <MainContainer>
       <Welcome />
       <RankingAndRecords isLogin={isLogin} />
+      <TodoListModal />
     </MainContainer>
   );
 }
