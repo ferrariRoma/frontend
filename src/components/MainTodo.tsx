@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { IChildProps } from '../shared/interfaces';
-import { TypoAtom } from '../atoms';
 import { Clock, SideButtons } from '../molecules';
-import ProgressButtonAtom from '../atoms/ProgressButtonAtom';
+import { CurrentTodoCard } from '../organisms';
 
 export interface IMainTodoProps extends IChildProps {
   isLogin: boolean;
@@ -23,7 +22,7 @@ function MainTodo({ isLogin, children }: IMainTodoProps) {
               45
             </SideButtons.ProgressButton>
           </SideButtons>
-          <div>메인</div>
+          <CurrentTodoCard>지금 할 일</CurrentTodoCard>
           <SideButtons>
             <SideButtons.IconButton
               onClick={() => {
@@ -58,11 +57,13 @@ const MainTodoContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 4rem;
 `;
 
 const MainTodoCenter = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 3.06rem;
 `;
 
 export default MainTodo;
