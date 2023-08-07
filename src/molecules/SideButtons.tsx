@@ -25,9 +25,13 @@ const SideButton = ({
   imageSrc: string;
   onClick: () => void;
 }) => {
-  <IconAtom onClick={onClick} size={4.455} backgroundColor={'whiteWine'}>
-    <img src={imageSrc} />
-  </IconAtom>;
+  return (
+    <button>
+      <IconAtom onClick={onClick} size={4.455} backgroundColor={'whiteWine'}>
+        <img src={imageSrc} />
+      </IconAtom>
+    </button>
+  );
 };
 
 const SideButtons = Object.assign(SideButtonsMain, {
