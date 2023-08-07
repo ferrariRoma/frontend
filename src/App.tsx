@@ -1,4 +1,4 @@
-import { RankingAndRecords } from './components';
+import { MainTodo, RankingAndRecords } from './components';
 import { useEffect } from 'react';
 import Welcome from './components/Welcome';
 import useCheckLogin, { setToken } from './hooks/useCheckLogin';
@@ -28,6 +28,7 @@ function App() {
   return (
     <MainContainer>
       <Welcome />
+      <MainTodo isLogin={isLogin} />
       <RankingAndRecords isLogin={isLogin} />
     </MainContainer>
   );
