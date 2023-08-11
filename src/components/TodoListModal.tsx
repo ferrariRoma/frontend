@@ -12,6 +12,18 @@ import { useEffect, useState } from 'react';
 import IconAtom from '../atoms/IconAtom';
 import styled from '@emotion/styled';
 
+interface TodoDto {
+  id: number;
+  date: string;
+  todo: string;
+  createdAt: Date;
+  duration: number;
+  done: boolean;
+  categories: string[] | null;
+  focusTime: number;
+  order: number | null;
+}
+
 /* 테스트용 ************************************ */
 
 const todoStubs = [
@@ -105,8 +117,8 @@ const todoStubs = [
   },
 ];
 
-const groupByDate = (todos: typeof todoStubs) => {
-  const todosMap = new Map<string, typeof todoStubs>();
+const groupByDate = (todos: TodoDto[]) => {
+  const todosMap = new Map<string, TodoDto[]>();
   for (const todo of todos) {
     const dateKey = todo.date;
     const group = todosMap.get(dateKey) || [];
@@ -120,7 +132,7 @@ const groupedStubs = groupByDate(todoStubs);
 
 /* ************************************ 테스트용 */
 
-const listRender = (mapTodo: Map<string, typeof todoStubs>) => {
+const listRender = (mapTodo: Map<string, TodoDto[]>) => {
   const dateList = Array.from(mapTodo.keys());
   const todoList = Array.from(mapTodo.values());
 
@@ -154,7 +166,7 @@ const listRender = (mapTodo: Map<string, typeof todoStubs>) => {
 };
 
 const TodoListModal = () => {
-  const [mapTodo, setMapTodo] = useState<typeof groupedStubs>(groupedStubs);
+  const [mapTodo, setMapTodo] = useState<Map<string, TodoDto[]>>(groupedStubs);
 
   const modifiedSameDate = (
     source: DraggableLocation,
@@ -164,7 +176,7 @@ const TodoListModal = () => {
       const copyMapTodo = new Map(prev);
       const copyTodo = copyMapTodo
         .get(source.droppableId)
-        ?.slice() as unknown as typeof todoStubs;
+        ?.slice() as unknown as TodoDto[];
 
       // [x]  1. 프론트 엔드 쪽에서 순서를 변경해준다.
       //      => tanStack Query를 사용한다면 api 요청만 하면 된다. 그걸 구현하게 되면 이 부분은 삭제하면 될 듯!
@@ -174,20 +186,41 @@ const TodoListModal = () => {
       copyTodo.splice(destination.index, 0, targetTodo);
       copyMapTodo.set(source.droppableId, copyTodo);
 
-      // [ ] 그와 동시에 백엔드에 api 요청을 보낸다.
+      // [ ] 그와 동시에 백엔드에 api 요청을 보낸다. -> 할 때 order 정보를 잘 보내줘야 될 듯
       return copyMapTodo;
     });
   };
 
-  const modifiedDiffDate = () => {
-    // get 해서 이동하는 대상을 변수에 저장
-    // 이동하는 부분에 set하기 => 이 부분은 array로 바꿔서 assign을 하고 새로 해당 일자에 set 해야 될 듯
-    // 원래 있던 곳의 데이터는 delete하기
-    alert('diff');
+  const modifiedDiffDate = (
+    source: DraggableLocation,
+    destination: DraggableLocation,
+  ) => {
+    setMapTodo((prev) => {
+      const copyMapTodo = new Map(prev);
+      const copyPrevTodo = copyMapTodo
+        .get(source.droppableId)
+        ?.slice() as unknown as TodoDto[];
+      // 1. 원래 source 부분에서 해당 todo를 삭제한다.
+      const [...target] = copyPrevTodo.splice(source.index, 1);
+      // 2. 수정 본을 set 한다.
+      copyMapTodo.set(source.droppableId, copyPrevTodo);
+
+      const copyCurrTodo = copyMapTodo
+        .get(destination.droppableId)
+        ?.slice() as unknown as TodoDto[];
+
+      // 3. 갈 곳에 todo를 추가한다.
+      copyCurrTodo.splice(destination.index, 0, ...target);
+
+      // 4. 수정 본을 set 한다.
+      copyMapTodo.set(destination.droppableId, copyCurrTodo);
+
+      return copyMapTodo;
+    });
   };
 
   const onDragDropHandler = (info: DropResult) => {
-    const { destination, draggableId, source } = info;
+    const { destination, source } = info;
     // 이동이 없을 때
     if (!destination) return;
     // 같은 날 안에서 이동을 했을 때
@@ -195,12 +228,12 @@ const TodoListModal = () => {
       modifiedSameDate(source, destination);
     } else if (source.droppableId !== destination.droppableId) {
       // 다른 날에서 이동했을 때
-      modifiedDiffDate();
+      modifiedDiffDate(source, destination);
     }
   };
 
   useEffect(() => {
-    console.log('state가 드디어..');
+    // console.log('state가 드디어..');
   }, [mapTodo]);
 
   return (
